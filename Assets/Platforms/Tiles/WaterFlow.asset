@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4d737e42b699640a6a5bcd24922008, type: 3}
+  m_Name: WaterFlow
+  m_EditorClassIdentifier: 
+  anims:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 0
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+        m_TextWithWhitespace: "Keys\u200B"
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 0
+    _keyValues:
+    - {x: 0, y: -1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: 0, z: 0}
+    _keys:
+    - {x: 0, y: -1, z: 0}
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: -1, y: 0, z: 0}
+    _values:
+    - animatedSprites:
+      - {fileID: 7090798230280036685, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      - {fileID: 717756920, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      - {fileID: -317770451, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      animationSpeed: 10
+      animationStartTime: 0
+      flags: 0
+    - animatedSprites:
+      - {fileID: 654520302, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      - {fileID: -1813148136, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      - {fileID: -2100224894, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      animationSpeed: 10
+      animationStartTime: 0
+      flags: 0
+    - animatedSprites:
+      - {fileID: -1414177841, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      - {fileID: 1063509417, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      - {fileID: -1958948718, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      animationSpeed: 10
+      animationStartTime: 0
+      flags: 0
+    - animatedSprites:
+      - {fileID: 2143546506, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      - {fileID: -10136373, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      - {fileID: -175323335, guid: 795e81a20aaefcd48947de8fcd097882, type: 3}
+      animationSpeed: 10
+      animationStartTime: 0
+      flags: 0

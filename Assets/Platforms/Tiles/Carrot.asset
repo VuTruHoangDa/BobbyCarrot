@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aedd7058fdeafff4da9201db7e1ef00f, type: 3}
+  m_Name: Carrot
+  m_EditorClassIdentifier: 
+  hole: {fileID: -366484028, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}
+  carrot:
+    animatedSprites:
+    - {fileID: 2030975467, guid: 2f7a660d6c8757143b0d119b4b48257f, type: 3}
+    - {fileID: 1422835358, guid: 2f7a660d6c8757143b0d119b4b48257f, type: 3}
+    - {fileID: 693549659, guid: 2f7a660d6c8757143b0d119b4b48257f, type: 3}
+    animationSpeed: 5
+    animationStartTime: 0
+    flags: 0
+  leaf:
+    animatedSprites:
+    - {fileID: -377092599, guid: f480b17b61e4b8b4a8a6347da2f3e8df, type: 3}
+    - {fileID: 1018779191, guid: f480b17b61e4b8b4a8a6347da2f3e8df, type: 3}
+    - {fileID: -276558478, guid: f480b17b61e4b8b4a8a6347da2f3e8df, type: 3}
+    animationSpeed: 5
+    animationStartTime: 0
+    flags: 0

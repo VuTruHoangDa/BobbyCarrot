@@ -1,0 +1,1064 @@
+fileFormatVersion: 2
+guid: 36b345b572290b84d8f056f5a7c7675d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8727234311202795951
+    second: font menu button 1_0
+  - first:
+      213: 3051688651729029680
+    second: font menu button 1_1
+  - first:
+      213: -8626832367116101540
+    second: font menu button 1_2
+  - first:
+      213: 6792758449196087722
+    second: font menu button 1_3
+  - first:
+      213: 8798046761032261838
+    second: font menu button 1_4
+  - first:
+      213: -7532271159527551626
+    second: font menu button 1_5
+  - first:
+      213: 1661108962778986243
+    second: font menu button 1_6
+  - first:
+      213: -6482392286007095867
+    second: font menu button 1_7
+  - first:
+      213: -2960082221453921322
+    second: font menu button 1_8
+  - first:
+      213: 3999750333891317035
+    second: font menu button 1_9
+  - first:
+      213: 1056056008833174320
+    second: font menu button 1_10
+  - first:
+      213: -8216578536479602433
+    second: font menu button 1_11
+  - first:
+      213: 8779099701164050660
+    second: font menu button 1_12
+  - first:
+      213: -1353068153317994281
+    second: font menu button 1_13
+  - first:
+      213: -1850897745620264298
+    second: font menu button 1_14
+  - first:
+      213: -4945516301221991745
+    second: font menu button 1_15
+  - first:
+      213: 346894571369604499
+    second: font menu button 1_16
+  - first:
+      213: 8744155661847803291
+    second: font menu button 1_17
+  - first:
+      213: -205595510315695805
+    second: font menu button 1_18
+  - first:
+      213: 8581151942633906754
+    second: font menu button 1_19
+  - first:
+      213: -8807748736461976104
+    second: font menu button 1_20
+  - first:
+      213: -6218919028564119400
+    second: font menu button 1_21
+  - first:
+      213: 1717537207240626812
+    second: font menu button 1_22
+  - first:
+      213: -7295312125951843606
+    second: font menu button 1_23
+  - first:
+      213: 3040079721405976149
+    second: font menu button 1_24
+  - first:
+      213: 6848555977879935943
+    second: font menu button 1_25
+  - first:
+      213: 5366423584498836260
+    second: font menu button 1_26
+  - first:
+      213: -8651651315352524304
+    second: font menu button 1_27
+  - first:
+      213: 5549718955403130777
+    second: font menu button 1_28
+  - first:
+      213: -6228851471783949255
+    second: font menu button 1_29
+  - first:
+      213: 1661538462133758795
+    second: font menu button 1_30
+  - first:
+      213: -3325288072546606179
+    second: font menu button 1_31
+  - first:
+      213: -6427657221384342487
+    second: font menu button 1_32
+  - first:
+      213: -6546144906950616951
+    second: font menu button 1_33
+  - first:
+      213: -6194921335524895335
+    second: font menu button 1_34
+  - first:
+      213: 7392131231502684656
+    second: font menu button 1_35
+  - first:
+      213: 5010967174252364800
+    second: font menu button 1_36
+  - first:
+      213: 6386763800542619051
+    second: font menu button 1_37
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: font menu button 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 220
+        width: 67
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa1f7defd5d5d1970800000000000000
+      internalID: 8727234311202795951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 220
+        width: 45
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03a466309a6c95a20800000000000000
+      internalID: 3051688651729029680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_2
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 220
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c58d3354ba5574880800000000000000
+      internalID: -8626832367116101540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_3
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 220
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa9bd59e1d9b44e50800000000000000
+      internalID: 6792758449196087722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_4
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 220
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec0aa944ae0f81a70800000000000000
+      internalID: 8798046761032261838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_5
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 220
+        width: 16
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67dc070c94ff77790800000000000000
+      internalID: -7532271159527551626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_6
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 220
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 307b8abfcc17d0710800000000000000
+      internalID: 1661108962778986243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_7
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 220
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cd80d1af8ae906a0800000000000000
+      internalID: -6482392286007095867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_8
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 220
+        width: 19
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d33a4c17ecabe6d0800000000000000
+      internalID: -2960082221453921322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 184
+        width: 67
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2d87d1bcb7f18730800000000000000
+      internalID: 3999750333891317035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_10
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 184
+        width: 45
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03b0b65485dd7ae00800000000000000
+      internalID: 1056056008833174320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_11
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 184
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff8c808ba59d8fd80800000000000000
+      internalID: -8216578536479602433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_12
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 184
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e80f9f1aa0a5d970800000000000000
+      internalID: 8779099701164050660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_13
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 184
+        width: 25
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d05694feafe83de0800000000000000
+      internalID: -1353068153317994281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_14
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 184
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69a9bbc8e4a4056e0800000000000000
+      internalID: -1850897745620264298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_15
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 184
+        width: 23
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fba62c2602ffd5bb0800000000000000
+      internalID: -4945516301221991745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_16
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 184
+        width: 25
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3952ff456ca60d400800000000000000
+      internalID: 346894571369604499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_17
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 184
+        width: 19
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b95b825fe3b795970800000000000000
+      internalID: 8744155661847803291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 147
+        width: 67
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 341c73009f3952df0800000000000000
+      internalID: -205595510315695805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_19
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 147
+        width: 45
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 242e8581a30661770800000000000000
+      internalID: 8581151942633906754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_20
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 147
+        width: 44
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ddc94c803794c580800000000000000
+      internalID: -8807748736461976104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_21
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 147
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 890b48fb716f1b9a0800000000000000
+      internalID: -6218919028564119400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_22
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 147
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7218167dfae5d710800000000000000
+      internalID: 1717537207240626812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_23
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 147
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae26a0f0648d1ca90800000000000000
+      internalID: -7295312125951843606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_24
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 147
+        width: 26
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55e854b4668803a20800000000000000
+      internalID: 3040079721405976149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_25
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 147
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cb59ed6065fa0f50800000000000000
+      internalID: 6848555977879935943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 112
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 423e45c41dd597a40800000000000000
+      internalID: 5366423584498836260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_27
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 112
+        width: 112
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f92fd397f82fe780800000000000000
+      internalID: -8651651315352524304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_28
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 112
+        width: 43
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9973e0c7cff840d40800000000000000
+      internalID: 5549718955403130777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_29
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 111
+        width: 65
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93c06a9969cae89a0800000000000000
+      internalID: -6228851471783949255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 76
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4ba1289d68fe0710800000000000000
+      internalID: 1661538462133758795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_31
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 76
+        width: 112
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d93240cbd143ad1d0800000000000000
+      internalID: -3325288072546606179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_32
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 76
+        width: 43
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9247965ffcf5cc6a0800000000000000
+      internalID: -6427657221384342487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_33
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 75
+        width: 65
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 988d9fcd3eb6725a0800000000000000
+      internalID: -6546144906950616951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 39
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 995dc801ed7370aa0800000000000000
+      internalID: -6194921335524895335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_35
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 39
+        width: 112
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f1d9ca9030269660800000000000000
+      internalID: 7392131231502684656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_36
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 39
+        width: 43
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 004847288188a8540800000000000000
+      internalID: 5010967174252364800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: font menu button 1_37
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 39
+        width: 65
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba5aaab86d752a850800000000000000
+      internalID: 6386763800542619051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      font menu button 1_0: 8727234311202795951
+      font menu button 1_1: 3051688651729029680
+      font menu button 1_10: 1056056008833174320
+      font menu button 1_11: -8216578536479602433
+      font menu button 1_12: 8779099701164050660
+      font menu button 1_13: -1353068153317994281
+      font menu button 1_14: -1850897745620264298
+      font menu button 1_15: -4945516301221991745
+      font menu button 1_16: 346894571369604499
+      font menu button 1_17: 8744155661847803291
+      font menu button 1_18: -205595510315695805
+      font menu button 1_19: 8581151942633906754
+      font menu button 1_2: -8626832367116101540
+      font menu button 1_20: -8807748736461976104
+      font menu button 1_21: -6218919028564119400
+      font menu button 1_22: 1717537207240626812
+      font menu button 1_23: -7295312125951843606
+      font menu button 1_24: 3040079721405976149
+      font menu button 1_25: 6848555977879935943
+      font menu button 1_26: 5366423584498836260
+      font menu button 1_27: -8651651315352524304
+      font menu button 1_28: 5549718955403130777
+      font menu button 1_29: -6228851471783949255
+      font menu button 1_3: 6792758449196087722
+      font menu button 1_30: 1661538462133758795
+      font menu button 1_31: -3325288072546606179
+      font menu button 1_32: -6427657221384342487
+      font menu button 1_33: -6546144906950616951
+      font menu button 1_34: -6194921335524895335
+      font menu button 1_35: 7392131231502684656
+      font menu button 1_36: 5010967174252364800
+      font menu button 1_37: 6386763800542619051
+      font menu button 1_4: 8798046761032261838
+      font menu button 1_5: -7532271159527551626
+      font menu button 1_6: 1661108962778986243
+      font menu button 1_7: -6482392286007095867
+      font menu button 1_8: -2960082221453921322
+      font menu button 1_9: 3999750333891317035
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
