@@ -58,8 +58,8 @@ namespace BobbyCarrot.Movers
 				await UniTask.Delay(delay);
 				if (cts.IsCancellationRequested) return false;
 			}
-			transform.position = pos;
 
+			transform.position = pos;
 			(p ?? Platform.Peek(pos)).OnEnter(this);
 			if (cts.IsCancellationRequested || speed <= 0) return false;
 

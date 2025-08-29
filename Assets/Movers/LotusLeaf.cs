@@ -8,18 +8,30 @@ namespace BobbyCarrot.Movers
 {
 	public sealed class LotusLeaf : Mover, IPlatform
 	{
+		private Vector3 newDir;
 		public async void Move(Vector3 direction)
 		{
-			if (this.direction != default) throw new System.Exception("Lá sen đang trong bước di chuyển, không thể thay đổi moverDirection !");
-			direction.CheckValidDpad();
-			if ((this.direction = direction) != default) await Move();
+			if (this.direction == default)
+			{
+				this.direction = direction;
+				await Move();
+			}
+			else newDir = direction;
 		}
 
 
 		protected override async UniTask<bool> Move()
 		{
 			if (dict.ContainsKey(this)) dict.Remove(this);
-			while (CanMove()) if (!await base.Move()) return false;
+			while (CanMove())
+			{
+				if (!await base.Move()) return false;
+				if (newDir != default)
+				{
+					direction = newDir;
+					newDir = default;
+				}
+			}
 			direction = default;
 
 			// Kiểm tra tại lá sen có dòng nước (WaterFlow) ?
