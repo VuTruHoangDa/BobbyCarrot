@@ -85,7 +85,7 @@ namespace BobbyCarrot.Platforms
 				case Type.Exit:
 					if (mover is not Bobby) break;
 
-					// Nếu đủ Carrot hoặc Egg thì kết thúc trò chơi (PlayGround.End)
+					// Nếu đủ Carrot hoặc Egg == 0 thì kết thúc trò chơi (PlayGround.End)
 					break;
 
 				case Type.WindStop:

@@ -89,6 +89,7 @@ MonoBehaviour:
     - {fileID: 9100000, guid: 9e8d6e7ddfdc10145ba4a329f043f37f, type: 2}
     - {fileID: 9100000, guid: 58152900bd0a5fc4ba18260fb9148254, type: 2}
   animator: {fileID: 784255582138763506}
+  highSpeed: 0.1
 --- !u!212 &8076137438510420496
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -108,6 +109,9 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -129,8 +133,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 937442841
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 356404113, guid: cd42e5530d1287646ab62ec3afd75d47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -37,7 +37,7 @@ namespace BobbyCarrot.Platforms
 			};
 			p.animationData = anims[p.direction];
 			flows.Add(p);
-			if (flows.Count == 1) CheckAllFlows(true);
+			if (flows.Count == 1) CheckAllFlows();
 
 			return p;
 		}
@@ -45,9 +45,9 @@ namespace BobbyCarrot.Platforms
 
 		public static readonly new int TASK_ID = "WaterFlow.CheckAllFlows".GetHashCode();
 
-		private static async void CheckAllFlows(bool gameBusy = false)
+		private static async void CheckAllFlows()
 		{
-			if (gameBusy)
+			if (PlayGround.taskList.Contains(Platform.TASK_ID))
 			{
 				var token = PlayGround.Token;
 				PlayGround.taskList.Add(TASK_ID);

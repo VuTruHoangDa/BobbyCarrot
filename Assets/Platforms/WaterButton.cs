@@ -30,17 +30,14 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		public override bool CanEnter(Mover mover) =>
-			mover is not LotusLeaf && mover is not Cloud;
+		public override bool CanEnter(Mover mover) => mover is not LotusLeaf && mover is not Cloud;
 
 
 		public override void OnEnter(Mover mover)
 		{
 			if (on || mover is not Bobby) return;
 
-			foreach (var button in buttons)
-				button.sprite = sprites[button.on = !button.on];
-
+			foreach (var button in buttons) button.sprite = sprites[button.on = !button.on];
 			WaterFlow.ChangeState();
 		}
 	}

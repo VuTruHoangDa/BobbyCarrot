@@ -23,7 +23,7 @@ namespace BobbyCarrot.Movers
 			{
 				if (!await base.Move()) return false;
 
-				// Quét tìm PinWheel > Cập nhật moverDirection
+				// Quét tìm PinWheel > Cập nhật mover.direction
 				var pos = transform.position;
 				Vector3 newDir = default;
 				if (direction != PinWheel.DIRECTIONS[Color.Yellow])

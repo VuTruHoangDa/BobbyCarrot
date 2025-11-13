@@ -133,8 +133,9 @@ namespace BobbyCarrot
 
 			do
 			{
-				item = tmp[UnityEngine.Random.Range(0, tmp.Count)];
-				tmp.Remove(item);
+				int index = UnityEngine.Random.Range(0, tmp.Count);
+				item = tmp[index];
+				tmp.RemoveAt(index);
 				yield return item;
 			} while (tmp.Count != 0);
 		}

@@ -62,9 +62,9 @@ namespace BobbyCarrot.Platforms
 
 			// Hủy Gamepad dpad, di chuyển mover tốc độ nhanh hơn
 			Main.RemoveListener(mover as IGamepadListener);
-			//mover.speed=
+			mover.speed = mover is Truck t ? t.highSpeed : mover.speed * 2f;
 
-			// Nếu mover/PlayGround bị hủy thì khôi phục mover, xóa hết
+			// Nếu mover/PlayGround bị hủy thì khôi phục mover, xóa hết stopPoint
 			(cts = CancellationTokenSource.CreateLinkedTokenSource(mover.Token, PlayGround.Token))
 				.Token.Register(() => Cleanup(mover));
 			(mover as IGamepadListener).dpad = direction;

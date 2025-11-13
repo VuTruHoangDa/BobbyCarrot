@@ -14,8 +14,8 @@ namespace BobbyCarrot.Movers
 	{
 		/// <summary>
 		/// Hướng nhìn, hướng di chuyển: <para/>
-		/// moverDirection == Zero: đứng yên<br/>
-		/// moverDirection != Zero: đứng yên xoay mặt hoặc đang di chuyển
+		/// direction == Zero: đứng yên<br/>
+		/// direction != Zero: đứng yên xoay mặt hoặc đang di chuyển
 		/// </summary>
 		public virtual Vector3 direction { get; protected set; }
 		public float speed;

@@ -56,5 +56,8 @@ namespace BobbyCarrot.Movers
 			base.OnDisable();
 			Main.RemoveListener(this);
 		}
+
+
+		public float highSpeed;
 	}
 }

@@ -110,8 +110,7 @@ namespace BobbyCarrot.Platforms
 			{
 				var color = listTurnOn[UnityEngine.Random.Range(0, listTurnOn.Count)];
 				listTurnOn.Remove(color);
-				foreach (var pinWheel in PinWheel.dict[color].Random())
-					pinWheel.ChangeState(true);
+				foreach (var pinWheel in PinWheel.dict[color].Random()) pinWheel.ChangeState(true);
 				await UniTask.Yield();
 				if (token.IsCancellationRequested) return;
 			} while (listTurnOn.Count != 0);
@@ -124,13 +123,10 @@ namespace BobbyCarrot.Platforms
 
 		public override void OnEnter(Mover mover)
 		{
-			if (mover is Flyer || mover is Fireball) return;
+			if (mover is Flyer or Fireball) return;
 
-			foreach (var button in dict[color])
-				button.sprite = sprites[color][button.on = !button.on];
-
-			foreach (var pinWheel in PinWheel.dict[color].Random())
-				pinWheel.ChangeState(on);
+			foreach (var button in dict[color]) button.sprite = sprites[color][button.on = !button.on];
+			foreach (var pinWheel in PinWheel.dict[color].Random()) pinWheel.ChangeState(on);
 		}
 	}
 }

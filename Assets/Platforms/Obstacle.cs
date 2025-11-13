@@ -2,7 +2,12 @@
 using Cysharp.Threading.Tasks;
 using RotaryHeart.Lib.SerializableDictionary;
 using System;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.Pool;
+using UnityEngine.Tilemaps;
 
 
 namespace BobbyCarrot.Platforms
@@ -16,17 +21,16 @@ namespace BobbyCarrot.Platforms
 		}
 		public Type type { get; private set; }
 
-		[SerializeField] private SerializableDictionaryBase<Type, RuntimeAnimatorController> anims;
+		[SerializeField] private AnimationData windAnim;
 		protected override Platform Create()
 		{
 			var p = base.Create() as Obstacle;
-			p.anims = anims;
 
 			switch (id)
 			{
 				case 84:
 					p.type = Type.Wind;
-					// animation
+					animationData = windAnim;
 					break;
 
 				case 109:
@@ -66,30 +70,15 @@ namespace BobbyCarrot.Platforms
 			if (mover is LotusLeaf or Cloud || type == Type.Border) return false;
 			if (mover is Flyer or Fireball) return true;
 
-			switch (type)
+			return type switch
 			{
-				case Type.Grass:
-					// Truck
-					throw new NotImplementedException();
-
-				case Type.Lock:
-					// Bobby và có chìa khóa
-					throw new NotImplementedException();
-
-				case Type.Rock:
-					// Truck và moverSpeed cao
-					throw new NotImplementedException();
-
-				case Type.Snow:
-					// Bobby và có xẻng
-					return mover is Bobby && PlayGround.items[Item.Type.Shovel] != 0;
-
-				case Type.Wind:
-					// Bobby và có Diều
-					return true; // test
-
-				default: return false;
-			}
+				Type.Grass => mover is Truck,
+				Type.Lock => mover is Bobby && PlayGround.items[Item.Type.Key] != 0,
+				Type.Rock => mover is Truck && mover.speed == (mover as Truck).highSpeed,
+				Type.Snow => mover is Bobby && PlayGround.items[Item.Type.Shovel] != 0,
+				Type.Wind => mover is Bobby && PlayGround.items[Item.Type.Kite] != 0,
+				_ => false,
+			};
 		}
 
 
@@ -100,23 +89,24 @@ namespace BobbyCarrot.Platforms
 			switch (type)
 			{
 				case Type.Grass:
-					// Truck
-					throw new NotImplementedException();
+					if (mover is Truck) Pop(index);
+					break;
 
 				case Type.Lock:
-					// Bobby và có chìa khóa
-					throw new NotImplementedException();
+					if (mover is Bobby) Pop(index);
+					break;
 
 				case Type.Rock:
-					// Truck và moverSpeed cao
-					throw new NotImplementedException();
+					if (mover is Truck) Pop(index);
+					break;
 
 				case Type.Snow:
-					// Bobby và có xẻng
 					if (mover is Bobby) Pop(index);
 					break;
 
 				case Type.Wind:
+					if (mover is not Bobby) break;
+
 					mover.gameObject.SetActive(false);
 					Mover.Show<Flyer>(mover.transform.position, mover.direction);
 					break;
