@@ -26,7 +26,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0eee9c2f3405ac64faa13292e671ea6f
-    m_Address: Assets/Platforms/Tiles/PinWheelButton.asset
+    m_Address: Assets/Platforms/Tiles/FanButton.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -37,11 +37,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 15ec549a0da103242b1cfa8492678505
     m_Address: Assets/Platforms/Tiles/ConveyorButton.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1b62c9b249569e64382fe348516f8c03
-    m_Address: Assets/Platforms/Prefab/PinWheel UI.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -87,6 +82,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 689ca4bbeb15f614fb3e397f221c9584
     m_Address: Assets/Movers/Prefab/Fireball.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b773ffa1b75d9541827d16d917aad5a
+    m_Address: Assets/Platforms/Prefab/Fan UI.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bad6e723566b27142b38b64b24dcfca1
-    m_Address: Assets/Platforms/Tiles/BeanTreeNode.asset
+    m_Address: Assets/Platforms/Tiles/Tree.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e436bfee36199f94bb3c521ba4d2275f
-    m_Address: Assets/Platforms/Tiles/PinWheel.asset
+    m_Address: Assets/Platforms/Tiles/Fan.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

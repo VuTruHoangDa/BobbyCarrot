@@ -21,7 +21,7 @@ namespace BobbyCarrot.Platforms
 
 
 		public override bool CanEnter(Mover mover) =>
-			mover is not LotusLeaf and not Cloud && (mover is Flyer or Fireball || !hasEgg);
+			mover is not IPlatform && (mover is Flyer or Fireball || !hasEgg);
 
 
 		public override void OnExit(Mover mover)

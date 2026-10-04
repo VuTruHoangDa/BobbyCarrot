@@ -20,8 +20,7 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		public override bool CanEnter(Mover mover) =>
-			mover is Flyer or Fireball;
+		public override bool CanEnter(Mover mover) => mover is Flyer or Fireball;
 
 
 		public override async void OnEnter(Mover mover)
@@ -31,7 +30,7 @@ namespace BobbyCarrot.Platforms
 			animationData = anim;
 			var token = PlayGround.Token;
 			await UniTask.Delay(duration);
-			if (!token.IsCancellationRequested) Pop(index);
+			if (!token.IsCancellationRequested) Pop(position);
 		}
 	}
 }

@@ -13,10 +13,7 @@ namespace BobbyCarrot.Platforms
 		private static readonly List<WaterFlow> flows = new();
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void Init()
-		{
-			PlayGround.onAwake += () => flows.Clear();
-		}
+		private static void Init() => PlayGround.onAwake += () => flows.Clear();
 
 
 		[SerializeField] private SerializableDictionaryBase<Vector3, AnimationData> anims;
@@ -43,23 +40,25 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		public static readonly new int TASK_ID = "WaterFlow.CheckAllFlows".GetHashCode();
+		public static readonly int Task_CheckAllFlows = "WaterFlow.CheckAllFlows".GetHashCode();
 
 		private static async void CheckAllFlows()
 		{
-			if (PlayGround.taskList.Contains(Platform.TASK_ID))
+			if (PlayGround.taskList.Contains(Task_Platform_Init))
 			{
-				var token = PlayGround.Token;
-				PlayGround.taskList.Add(TASK_ID);
-				while (!token.IsCancellationRequested
-					&& PlayGround.taskList.Contains(Platform.TASK_ID)) await UniTask.Yield();
-				if (token.IsCancellationRequested) return;
-				PlayGround.taskList.Remove(TASK_ID);
+				PlayGround.taskList.Add(Task_CheckAllFlows);
+				do await UniTask.Yield();
+				while (PlayGround.taskList.Contains(Task_Platform_Init));
+				PlayGround.taskList.Remove(Task_CheckAllFlows);
 			}
 
 			foreach (var flow in flows.Random())
 			{
-				var lotusLeaf = Peek(flow.index) as LotusLeaf;
+				var platform = Peek(flow.position);
+				if (platform is WaterFlow) continue;
+
+				// Có thể có platform đè lên lá sen
+				var lotusLeaf = platform is LotusLeaf leaf ? leaf : Get(flow.position, 1) as LotusLeaf;
 				if (lotusLeaf && lotusLeaf.direction == default) lotusLeaf.Move(flow.direction);
 			}
 		}
@@ -79,14 +78,9 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		public static void ChangeState()
+		public static void ChangeStates()
 		{
-			foreach (var flow in flows)
-			{
-				flow.direction = -flow.direction;
-				flow.animationData = flow.anims[flow.direction];
-			}
-
+			foreach (var flow in flows) flow.animationData = flow.anims[flow.direction *= -1];
 			CheckAllFlows();
 		}
 	}

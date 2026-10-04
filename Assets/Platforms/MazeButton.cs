@@ -11,10 +11,7 @@ namespace BobbyCarrot.Platforms
 	{
 		private static readonly List<MazeButton> buttons = new();
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void Init()
-		{
-			PlayGround.onAwake += () => buttons.Clear();
-		}
+		private static void Init() => PlayGround.onAwake += () => buttons.Clear();
 
 
 		[SerializeField] private SerializableDictionaryBase<bool, Sprite> sprites;
@@ -30,8 +27,7 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		public override bool CanEnter(Mover mover) =>
-			mover is not LotusLeaf and not Cloud;
+		public override bool CanEnter(Mover mover) => mover is not IPlatform;
 
 
 		public override void OnEnter(Mover mover)
@@ -39,7 +35,7 @@ namespace BobbyCarrot.Platforms
 			if (on || mover is not Bobby) return;
 
 			foreach (var button in buttons) button.sprite = sprites[button.on = !button.on];
-			Maze.ChangeState();
+			Maze.ChangeStates();
 		}
 	}
 }

@@ -19,10 +19,10 @@ namespace BobbyCarrot.Movers
 			while (CanMove())
 			{
 				if (!await Move()) return;
-				if (input != direction)
+				if (direction != input)
 				{
-					input.CheckValidDpad();
-					if ((direction = input) == default) break;
+					direction = input;
+					if (direction == default) break;
 				}
 			}
 

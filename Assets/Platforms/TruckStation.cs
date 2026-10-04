@@ -22,8 +22,7 @@ namespace BobbyCarrot.Platforms
 
 
 		public override bool CanEnter(Mover mover) =>
-			mover is not LotusLeaf and not Cloud
-			&& (mover is Flyer or Fireball || (mover is Truck ? !hasTruck :
+			mover is not IPlatform && (mover is Flyer or Fireball || (mover is Truck ? !hasTruck :
 			!hasTruck || PlayGround.items[Item.Type.Gas] != 0));
 
 
@@ -32,9 +31,9 @@ namespace BobbyCarrot.Platforms
 			if (mover is Flyer or Fireball || (mover is Bobby && !hasTruck)) return;
 
 			sprite = sprites[hasTruck = !hasTruck];
-			mover.gameObject.SetActive(false);
 			if (mover is Bobby) Mover.Show<Truck>(mover.transform.position, mover.direction);
 			else Mover.Show<Bobby>(mover.transform.position, mover.direction);
+			mover.gameObject.SetActive(false);
 		}
 	}
 }

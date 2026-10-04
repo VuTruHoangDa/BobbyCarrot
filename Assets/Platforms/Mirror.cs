@@ -1,8 +1,6 @@
 ﻿using BobbyCarrot.Movers;
-using Cysharp.Threading.Tasks;
 using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 
 namespace BobbyCarrot.Platforms
@@ -31,8 +29,7 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		public override bool CanEnter(Mover mover) =>
-			mover is Flyer or Bobby or Fireball;
+		public override bool CanEnter(Mover mover) => mover is Flyer or Bobby or Fireball;
 
 
 		public override void OnEnter(Mover mover)

@@ -19,15 +19,38 @@ namespace BobbyCarrot
 		}
 
 
-		public static Level level; /*{ get; private set; }*/
-		public static void NextLevel()
+		public static Map level; /*{ get; private set; }*/
+		private static void NextLevel()
 		{
-
+			throw new NotImplementedException();
 		}
 
 
+		#region Gamepad, Keyboard
 		public static Vector3 dpad { get; private set; }
 		public static event Action<Vector3> dpadChanged;
+		private static readonly List<IPlayer> listeners = new();
+		public static void Register(IPlayer listener)
+		{
+			if (listeners.Contains(listener)) return;
+
+			listeners.Add(listener);
+			if (listener.dpad != dpad) listener.dpad = dpad;
+		}
+
+
+		public static void Unregister(IPlayer listener)
+		{
+			if (!listeners.Contains(listener)) return;
+
+			listeners.Remove(listener);
+			if (listener.dpad != default) listener.dpad = default;
+		}
+
+
+		public static bool IsRegistered(IPlayer listener) => listeners.Contains(listener);
+
+
 		private void Update()
 		{
 			Vector3 d = default;
@@ -40,7 +63,6 @@ namespace BobbyCarrot
 					if (Screen.fullScreen) Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
 					else Screen.SetResolution(fullRes.width, fullRes.height, true);
 
-				// Move
 				d = k.upArrowKey.isPressed ? Vector3.up
 					: k.rightArrowKey.isPressed ? Vector3.right
 					: k.downArrowKey.isPressed ? Vector3.down
@@ -61,6 +83,9 @@ namespace BobbyCarrot
 					: g.leftStick.down.isPressed ? Vector3.down
 					: g.leftStick.left.isPressed ? Vector3.left
 					: d;
+
+				// SELECT = QUIT
+				if (g.selectButton.wasPressedThisFrame) Application.Quit();
 			}
 
 			if (d != dpad)
@@ -70,26 +95,6 @@ namespace BobbyCarrot
 				dpadChanged?.Invoke(dpad);
 			}
 		}
-
-
-		private static readonly List<IGamepadListener> listeners = new();
-		public static void AddListener(IGamepadListener listener)
-		{
-			if (!listeners.Contains(listener))
-			{
-				listeners.Add(listener);
-				listener.dpad = dpad;
-			}
-		}
-
-
-		public static void RemoveListener(IGamepadListener listener)
-		{
-			if (listeners.Contains(listener))
-			{
-				listeners.Remove(listener);
-				listener.dpad = default;
-			}
-		}
+		#endregion
 	}
 }

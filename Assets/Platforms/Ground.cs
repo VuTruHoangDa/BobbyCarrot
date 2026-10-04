@@ -10,7 +10,7 @@ namespace BobbyCarrot.Platforms
 	{
 		public enum Type
 		{
-			Water, Sky, Ice, Exit, WindStop, DragonTail, Land
+			Land, Water, Sky, Ice, Exit, WindStop, DragonTail
 		}
 		public Type type { get; private set; }
 
@@ -27,8 +27,7 @@ namespace BobbyCarrot.Platforms
 			else if (id == 182) p.type = Type.Exit;
 			else if (id == 85) p.type = Type.WindStop;
 			else if (id == 121) p.type = Type.DragonTail;
-			else if (id == 181) startPoint = index;
-			else p.type = Type.Land;
+			else if (id == 181) startPoint = position;
 
 			p.dragonAnim = dragonAnim;
 			p.delayShowingFireBall = delayShowingFireBall;
@@ -44,6 +43,7 @@ namespace BobbyCarrot.Platforms
 
 		[SerializeField] private AnimationData dragonAnim;
 		[SerializeField] private int delayShowingFireBall;
+
 		public override async void OnEnter(Mover mover)
 		{
 			var token = PlayGround.Token;
@@ -55,14 +55,13 @@ namespace BobbyCarrot.Platforms
 						#region Bắn cầu lửa và đợi cầu lửa biến mất
 						// Hủy dpad Bobby/ Truck
 
-						var head = Peek(new(index.x - 2, index.y)) as Platform;
+						var head = Peek(new(position.x - 2, position.y)) as Platform;
 						head.animationData = dragonAnim;
 						await UniTask.Delay(delayShowingFireBall);
 						if (token.IsCancellationRequested) return;
 
-						Mover.Show<Fireball>(head.index, Vector3.left);
-						var fireball = Mover.GetSingleton<Fireball>();
-						if (!fireball)
+						var fireball = Mover.Show<Fireball>(head.position, Vector3.left);
+						if (!fireball.gameObject.activeSelf)
 						{
 							// Đăng ký dpad Bobby/ Truck
 							break;
@@ -85,18 +84,16 @@ namespace BobbyCarrot.Platforms
 				case Type.Exit:
 					if (mover is not Bobby) break;
 
-					// Nếu đủ Carrot hoặc Egg == 0 thì kết thúc trò chơi (PlayGround.End)
+					// Nếu đủ Carrot hoặc Egg == 0 thì kết thúc màn chơi (PlayGround.End)
 					break;
 
 				case Type.WindStop:
 					if (mover is not Flyer) break;
 
 					// Flyer biến mất, hiện Bobby
-					mover.gameObject.SetActive(false);
 					Mover.Show<Bobby>(mover.transform.position, mover.direction);
+					mover.gameObject.SetActive(false);
 					break;
-
-				default: break;
 			}
 		}
 	}

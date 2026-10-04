@@ -1,21 +1,30 @@
 ﻿using BobbyCarrot;
-using BobbyCarrot.Movers;
 using Cysharp.Threading.Tasks;
-using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.UI;
 
 
 public class Test : MonoBehaviour
 {
-	public Text txt;
+	UniTask t;
 	private void Start()
 	{
-		// ncsdjkcbdSCkj
-		// zanjkzasb j ksdcsidc ndcsnnc c ncdic  incnai opqopsosmxzM<C,zxmczxnmb qwerty
-		Main.AddListener(this as IGamepadListener);
-		// hehe jaja
+		t = A();
+	}
+
+
+	async UniTask A()
+	{
+		await UniTask.Delay(5000);
+		int i = 0;
+		int a = 1 / i;
+	}
+
+
+	private async void Update()
+	{
+		if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+			print(t.isRunning());
+
 	}
 }

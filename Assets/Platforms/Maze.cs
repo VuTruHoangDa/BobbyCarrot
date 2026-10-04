@@ -11,10 +11,7 @@ namespace BobbyCarrot.Platforms
 	{
 		private static readonly List<Maze> mazes = new();
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void Init()
-		{
-			PlayGround.onAwake += () => mazes.Clear();
-		}
+		private static void Init() => PlayGround.onAwake += () => mazes.Clear();
 
 
 		private enum Type
@@ -47,7 +44,7 @@ namespace BobbyCarrot.Platforms
 
 		public override bool CanEnter(Mover mover)
 		{
-			if (mover is LotusLeaf or Cloud or Truck) return false;
+			if (mover is IPlatform or Truck) return false;
 			if (mover is Flyer or Fireball) return true;
 
 			var d = mover.direction;
@@ -97,7 +94,7 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		public static void ChangeState()
+		public static void ChangeStates()
 		{
 			foreach (var maze in mazes) maze.OnExit(null);
 		}

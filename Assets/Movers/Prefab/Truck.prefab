@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.05
+  <originalSpeed>k__BackingField: 0.05
   delay: 10
-  spriteRenderer: {fileID: 8076137438510420496}
+  <spriteRenderer>k__BackingField: {fileID: 8076137438510420496}
   anims:
     reorderableList:
       canAdd: 1
@@ -89,9 +90,9 @@ MonoBehaviour:
     - {fileID: 9100000, guid: 9e8d6e7ddfdc10145ba4a329f043f37f, type: 2}
     - {fileID: 9100000, guid: 58152900bd0a5fc4ba18260fb9148254, type: 2}
   animator: {fileID: 784255582138763506}
-  highSpeed: 0.1
 --- !u!212 &8076137438510420496
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -115,7 +116,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -134,9 +135,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 937442841
-  m_SortingLayer: 0
+  m_SortingLayerID: 335754105
+  m_SortingLayer: 1
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 356404113, guid: cd42e5530d1287646ab62ec3afd75d47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -146,8 +148,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!95 &784255582138763506
 Animator:
   serializedVersion: 7

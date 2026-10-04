@@ -48,7 +48,7 @@ namespace BobbyCarrot.Platforms
 
 
 		public override bool CanEnter(Mover mover) =>
-			mover is not LotusLeaf and not Cloud && (mover is Flyer or Fireball || !on);
+			mover is not IPlatform && (mover is Flyer or Fireball || !on);
 
 
 		private static readonly IReadOnlyDictionary<Color, List<Block>> blocks = new Dictionary<Color, List<Block>>
@@ -56,21 +56,19 @@ namespace BobbyCarrot.Platforms
 			[Color.Yellow] = new(),
 			[Color.Red] = new()
 		};
-		public static void ChangeState(Color color)
+		public static void ChangeStates(Color color)
 		{
-			foreach (var block in blocks[color])
+			foreach (var block in blocks[color]) 
 				block.sprite = block.sprites[color][block.on = !block.on];
 		}
 
 
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void Init()
-		{
+		private static void Init() =>
 			PlayGround.onAwake += () =>
 			{
 				blocks[Color.Yellow].Clear();
 				blocks[Color.Red].Clear();
 			};
-		}
 	}
 }

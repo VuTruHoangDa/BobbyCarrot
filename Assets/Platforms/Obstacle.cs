@@ -1,13 +1,6 @@
 ﻿using BobbyCarrot.Movers;
-using Cysharp.Threading.Tasks;
-using RotaryHeart.Lib.SerializableDictionary;
 using System;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.Pool;
-using UnityEngine.Tilemaps;
 
 
 namespace BobbyCarrot.Platforms
@@ -67,14 +60,14 @@ namespace BobbyCarrot.Platforms
 
 		public override bool CanEnter(Mover mover)
 		{
-			if (mover is LotusLeaf or Cloud || type == Type.Border) return false;
+			if (mover is IPlatform || type == Type.Border) return false;
 			if (mover is Flyer or Fireball) return true;
 
 			return type switch
 			{
 				Type.Grass => mover is Truck,
 				Type.Lock => mover is Bobby && PlayGround.items[Item.Type.Key] != 0,
-				Type.Rock => mover is Truck && mover.speed == (mover as Truck).highSpeed,
+				Type.Rock => mover is Truck && mover.speed == Conveyor.speed,
 				Type.Snow => mover is Bobby && PlayGround.items[Item.Type.Shovel] != 0,
 				Type.Wind => mover is Bobby && PlayGround.items[Item.Type.Kite] != 0,
 				_ => false,
@@ -89,26 +82,26 @@ namespace BobbyCarrot.Platforms
 			switch (type)
 			{
 				case Type.Grass:
-					if (mover is Truck) Pop(index);
+					if (mover is Truck) Pop(position);
 					break;
 
 				case Type.Lock:
-					if (mover is Bobby) Pop(index);
+					if (mover is Bobby) Pop(position);
 					break;
 
 				case Type.Rock:
-					if (mover is Truck) Pop(index);
+					if (mover is Truck) Pop(position);
 					break;
 
 				case Type.Snow:
-					if (mover is Bobby) Pop(index);
+					if (mover is Bobby) Pop(position);
 					break;
 
 				case Type.Wind:
 					if (mover is not Bobby) break;
 
-					mover.gameObject.SetActive(false);
 					Mover.Show<Flyer>(mover.transform.position, mover.direction);
+					mover.gameObject.SetActive(false);
 					break;
 
 				default: throw new Exception();

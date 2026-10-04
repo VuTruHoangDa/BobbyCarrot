@@ -1,5 +1,4 @@
 ﻿using BobbyCarrot.Movers;
-using Cysharp.Threading.Tasks;
 using RotaryHeart.Lib.SerializableDictionary;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace BobbyCarrot.Platforms
 	[CreateAssetMenu(fileName = "CloudGrid", menuName = "Platforms/CloudGrid")]
 	public sealed class CloudGrid : Platform
 	{
-		private Color color;
+		public Color color { get; private set; }
 		[SerializeField] private SerializableDictionaryBase<Color, Sprite> sprites;
 		protected override Platform Create()
 		{
@@ -28,17 +27,12 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		public override bool CanEnter(Mover mover) =>
-			mover is Flyer or Fireball or Cloud;
+		public override bool CanEnter(Mover mover) => mover is Flyer or Fireball or Cloud;
 
 
 		public override void OnEnter(Mover mover)
 		{
-			if (mover is Flyer || mover is Fireball || (mover as Cloud).color != color) return;
-
-			var cloud = Peek(index) as Cloud;
-			cloud.Move(default);
-			cloud.speed = 0;
+			if (mover is Cloud cloud && cloud.color == color) cloud.Lock();
 		}
 	}
 }

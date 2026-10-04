@@ -1,7 +1,10 @@
 ﻿using BobbyCarrot.Platforms;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 namespace BobbyCarrot.Movers
@@ -9,41 +12,83 @@ namespace BobbyCarrot.Movers
 	public sealed class LotusLeaf : Mover, IPlatform
 	{
 		private Vector3 newDir;
-		public async void Move(Vector3 direction)
+		public void Move(Vector3 direction)
 		{
 			if (this.direction == default)
 			{
 				this.direction = direction;
-				await Move();
+				Move().Forget();
 			}
 			else newDir = direction;
 		}
 
 
+		private static UniTask task;
 		protected override async UniTask<bool> Move()
 		{
-			if (dict.ContainsKey(this)) dict.Remove(this);
+			if (balances.ContainsKey(this)) balances.Remove(this);
+			else if (woodBalances.ContainsKey(this)) woodBalances.Remove(this);
+			else if (inertias.Contains(this)) inertias.Remove(this);
+			++count;
+			if (!task.isRunning()) task = CheckBalancesAndInertias();
 			while (CanMove())
 			{
-				if (!await base.Move()) return false;
+				var t = base.Move();
+				check = true;
+				if (!await t) return false;
+
 				if (newDir != default)
 				{
 					direction = newDir;
 					newDir = default;
 				}
+
+				// Hiện lá sen lên nếu khởi tạo ban đầu bị ẩn bởi platform
+				if (spriteRenderer.sortingLayerID == 0)
+				{
+					spriteRenderer.sortingLayerID = Util.Layer_Mover;
+					spriteRenderer.sortingOrder = -1;
+				}
 			}
-			direction = default;
 
-			// Kiểm tra tại lá sen có dòng nước (WaterFlow) ?
-			// Nếu có thì lá sen đang "cân bằng động" => Kiểm tra lá sen mỗi frame
+			--count;
 			var pos = transform.position;
-			Platform.Pop(pos);
-			var waterFlow = Platform.Peek(pos) as WaterFlow;
-			Platform.Push(pos, this);
-			if (!waterFlow) return true;
+			if (Platform.Get(pos, Platform.Peek(pos) is LotusLeaf ? 1 : 2) is WaterFlow waterFlow)
+			{
+				direction = default;
 
-			dict[this] = waterFlow;
-			if (dict.Count == 1) CheckSpecialLeafs();
+				// Kiểm tra vật cản theo hướng waterFlow.direction là lá sen khác hoặc miếng gỗ (Wood) ?
+				// Và ngay dưới lá sen cản, Wood là platform có thể đi vào ?
+				// => Nếu vậy thì lá sen đang cân bằng động, thêm vào balances hoặc woodBalances
+
+				var platform = Platform.Peek(pos += waterFlow.direction);
+				if (platform is LotusLeaf && Platform.Get(pos, 1).CanEnter(this))
+				{
+					balances[this] = waterFlow;
+					if (!task.isRunning()) task = CheckBalancesAndInertias();
+				}
+				else if (platform is Wood wood && Platform.Get(pos, 1).CanEnter(this)) woodBalances[this] = (waterFlow, wood);
+				return true;
+			}
+
+			if (Platform.Peek(pos += direction) is LotusLeaf leaf)
+			{
+				// Kiểm tra lá sen có bị cản bởi lá sen khác đang di chuyển (cùng hướng/ vuông góc) ?
+				// Và ngay dưới lá sen cản là platform có thể đi vào ?
+				// => Nếu vậy thì lá sen đang có quán tính nhưng tạm thời bị cản, thêm vào inertias
+
+				if (leaf.direction != default && leaf.direction != -direction && Platform.Get(pos, 1).CanEnter(this))
+				{
+					inertias.Add(this);
+					if (!task.isRunning()) task = CheckBalancesAndInertias();
+					return true;
+				}
+
+				direction = default;
+				return true;
+			}
+
+			direction = default;
 			return true;
 		}
 
@@ -52,52 +97,113 @@ namespace BobbyCarrot.Movers
 			mover is Flyer or Fireball || (mover is Bobby && direction == default);
 
 
-		public async void OnEnter(Mover mover)
+		public void OnEnter(Mover mover)
 		{
 			if (mover is not Bobby) return;
 
 			mover.transform.parent = transform;
+			mover.transform.localPosition = new(0, 0.4f);
+			if (wood)
+			{
+				MoveWoodBalances(wood);
+				wood = null;
+				return;
+			}
+
 			direction = mover.direction;
-			await Move();
+			Move().Forget();
 		}
 
 
 		public bool CanExit(Mover mover) => mover is not Bobby || direction == default;
 
 
-		public void OnExit(Mover mover) => mover.transform.parent = null;
+		public void OnExit(Mover mover)
+		{
+			if (mover is not Bobby) return;
+
+			mover.transform.parent = null;
+			mover.transform.position = transform.position;
+		}
 
 
-		#region Kiểm tra các lá sen cân bằng động
-		private static readonly Dictionary<LotusLeaf, WaterFlow> dict = new();
+		private static int count;
+		private static bool check;
+		private static readonly List<LotusLeaf> inertias = new();
+		private static readonly Dictionary<LotusLeaf, WaterFlow> balances = new();
 		private static readonly List<LotusLeaf> tmp = new();
-		private static async void CheckSpecialLeafs()
+		private static async UniTask CheckBalancesAndInertias()
 		{
 			var token = PlayGround.Token;
 			while (true)
 			{
-				await UniTask.DelayFrame(1);
-				if (token.IsCancellationRequested || dict.Count == 0) return;
+				await UniTask.NextFrame();
+				if (token.IsCancellationRequested || count == 0 || (balances.Count == 0 && inertias.Count == 0)) return;
 
+				if (!check) continue;
+
+				check = false;
+
+				// Kiểm tra balances
 				tmp.Clear();
-				foreach (var kvp in dict)
-					if (kvp.Key && kvp.Key.CanMove(kvp.Value.direction))
+				foreach (var leaf_flow in balances)
+					if (leaf_flow.Key.CanMove(leaf_flow.Value.direction))
 					{
-						kvp.Key.direction = kvp.Value.direction;
-						tmp.Add(kvp.Key);
+						leaf_flow.Key.direction = leaf_flow.Value.direction;
+						tmp.Add(leaf_flow.Key);
 					}
 
-				if (tmp.Count == 0) continue;
+				foreach (var leaf in tmp) leaf.Move().Forget();
+
+				// Kiểm tra inertias
+				tmp.Clear();
+				tmp.AddRange(inertias);
 				foreach (var leaf in tmp) leaf.Move().Forget();
 			}
 		}
 
 
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void Init()
+		private static readonly Dictionary<LotusLeaf, (WaterFlow, Wood)> woodBalances = new();
+		private static Wood wood;
+		public static void OnWoodDeleted(Wood wood, Mover mover)
 		{
-			PlayGround.onAwake += () => dict.Clear();
+			if (mover is Bobby && Platform.Peek(mover.transform.position + mover.direction) is LotusLeaf lotusLeaf
+				&& woodBalances.ContainsKey(lotusLeaf))
+			{
+				// Bobby đang đi đến lá sen trong hệ cân bằng động, sẽ xử lý khi Bobby tới lá sen 
+				LotusLeaf.wood = wood;
+				return;
+			}
+
+			MoveWoodBalances(wood);
 		}
-		#endregion
+
+
+		private static void MoveWoodBalances(Wood wood)
+		{
+			tmp.Clear();
+			foreach (var leaf_flow_wood in woodBalances)
+				if (leaf_flow_wood.Value.Item2 == wood)
+				{
+					leaf_flow_wood.Key.direction = leaf_flow_wood.Value.Item1.direction;
+					tmp.Add(leaf_flow_wood.Key);
+				}
+
+			foreach (var leaf in tmp.Random()) leaf.Move().Forget();
+		}
+
+
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void Init() =>
+			PlayGround.onAwake += () =>
+			{
+				task = UniTask.CompletedTask;
+				count = 0;
+				check = false;
+				inertias.Clear();
+				balances.Clear();
+				woodBalances.Clear();
+				wood = null;
+			};
 	}
 }

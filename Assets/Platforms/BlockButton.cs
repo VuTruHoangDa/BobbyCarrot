@@ -47,7 +47,7 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		public override bool CanEnter(Mover mover) => mover is not LotusLeaf and not Cloud;
+		public override bool CanEnter(Mover mover) => mover is not IPlatform;
 
 
 		public override void OnEnter(Mover mover)
@@ -55,7 +55,7 @@ namespace BobbyCarrot.Platforms
 			if (mover is Flyer or Fireball) return;
 
 			sprite = sprites[color][on = !on];
-			Block.ChangeState(color);
+			Block.ChangeStates(color);
 		}
 	}
 }

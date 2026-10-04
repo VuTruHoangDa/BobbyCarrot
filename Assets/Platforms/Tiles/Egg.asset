@@ -36,8 +36,8 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 0
-    _keyValues: 0100
-    _keys: 0100
+    _keyValues: 0100y
+    _keys: 0100y
     _values:
     - {fileID: -1095822811, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}
     - {fileID: -964778574, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}

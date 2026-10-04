@@ -15,24 +15,38 @@ namespace BobbyCarrot.Platforms
 		{
 			var p = base.Create() as Wood;
 			p.UI = UI;
+
+			// Che đậy lá sen nếu có
+			if (Peek(position) is LotusLeaf leaf) leaf.spriteRenderer.sortingLayerID = 0;
+
 			return p;
 		}
 
 
-		public override bool CanEnter(Mover mover) => mover is not LotusLeaf and not Cloud;
+		public override bool CanEnter(Mover mover) => mover is not IPlatform;
 
 
-		public override void OnExit(Mover mover)
+		public override async void OnExit(Mover mover)
 		{
 			if (mover is Flyer or Fireball) return;
 
-			Pop(index);
-			UI = Instantiate(UI, index, Quaternion.identity);
+			Pop(position);
+			UI = Instantiate(UI, position, Quaternion.identity);
 			UniTask.Delay((int)(UI.runtimeAnimatorController.animationClips[0].length * 1000) + 500)
 				.ContinueWith(() =>
 				{
 					if (UI) Destroy(UI.gameObject);
 				}).Forget();
+
+			// Hiện lá sen nếu có
+			if (Peek(position) is LotusLeaf leaf)
+			{
+				leaf.spriteRenderer.sortingLayerID = Util.Layer_Mover;
+				leaf.spriteRenderer.sortingOrder = -1;
+			}
+
+			LotusLeaf.OnWoodDeleted(this, mover);
+			Cloud.OnWoodDeleted(this, mover);
 		}
 	}
 }

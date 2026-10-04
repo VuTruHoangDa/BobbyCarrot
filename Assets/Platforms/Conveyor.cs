@@ -1,4 +1,5 @@
 ﻿using BobbyCarrot.Movers;
+using Cysharp.Threading.Tasks;
 using RotaryHeart.Lib.SerializableDictionary;
 using System.Collections.Generic;
 using System.Threading;
@@ -10,11 +11,6 @@ namespace BobbyCarrot.Platforms
 	[CreateAssetMenu(fileName = "Conveyor", menuName = "Platforms/Conveyor")]
 	public sealed class Conveyor : Platform
 	{
-		private static readonly List<Conveyor> conveyors = new();
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-		private static void Init() => PlayGround.onAwake += () => conveyors.Clear();
-
-
 		[SerializeField] private SerializableDictionaryBase<Vector3, AnimationData> anims;
 		private Vector3 direction;
 		protected override Platform Create()
@@ -35,80 +31,127 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		public override bool CanEnter(Mover mover) =>
-			mover is not LotusLeaf and not Cloud
-			&& (mover is Flyer or Fireball || mover.direction == direction);
+		public override bool CanEnter(Mover mover) => mover is not IPlatform && CanExit(mover);
 
 
-		private static StopPoint stopPoint;
-		private static CancellationTokenSource cts;
-		public override void OnEnter(Mover mover)
+		private static WayPoint wayPoint;
+		public const float speed = 0.1f;
+		public override async void OnEnter(Mover mover)
 		{
-			if (stopPoint != null || mover is Flyer or Fireball) return;
+			if (wayPoint != null || mover is Flyer or Fireball) return;
 
-			// Quét theo hướng Conveyor > tìm điểm kết thúc di chuyển (ngoài Conveyor)
-			Vector3 i = index;
-			while (Peek(i += direction) is Conveyor c && c.direction == direction) ;
+			FindWayPoint(position);
+			if (wayPoint == null) return;
 
-			// Cài Stop Point. Mover trượt quán tính thêm 1 bước nữa nếu có thể.
-			stopPoint = new()
+			Main.Unregister(mover as IPlayer);
+			Push(wayPoint);
+			mover.speed = speed;
+			var tokenPlayGround = PlayGround.Token;
+			var tokenMover = mover.Token;
+			(mover as IPlayer).dpad = direction;
+			while (!tokenPlayGround.IsCancellationRequested && !tokenMover.IsCancellationRequested
+				&& mover.direction != default && wayPoint != null) await UniTask.Yield();
+
+			if (tokenPlayGround.IsCancellationRequested || wayPoint == null) return;
+
+			Pop(wayPoint.position);
+			wayPoint = null;
+			if (tokenMover.IsCancellationRequested) return;
+
+			mover.speed = (mover as IPlayer).originalSpeed;
+			Main.Register(mover as IPlayer);
+
+
+			void FindWayPoint(Vector3 pos)
 			{
-				originalSpeed = mover.speed,
-				index = !Peek(i).CanEnter(mover) ? i - direction
-				: Peek(i + direction).CanEnter(mover) ? i + direction
-				: i
-			};
-			Push(stopPoint.index, stopPoint);
+				// Quét theo hướng băng chuyền tìm platform cản 1:
+				// Cản 1: Border, Rock, Băng chuyền khác chiều, platform khác
+				IPlatform platform;
+				do platform = Peek(pos += direction);
+				while (platform is Conveyor conveyor && conveyor.direction == direction);
 
-			// Hủy Gamepad dpad, di chuyển mover tốc độ nhanh hơn
-			Main.RemoveListener(mover as IGamepadListener);
-			mover.speed = mover is Truck t ? t.highSpeed : mover.speed * 2f;
+				var o = platform as Obstacle;
+				var c = platform as Conveyor;
+				if ((o && o.type == Obstacle.Type.Border)
+					|| (c && c.direction != direction)
+					|| (o && o.type == Obstacle.Type.Rock && mover is Bobby))
+				{
+					if ((pos -= direction) != position) wayPoint = new() { position = pos };
+					return;
+				}
 
-			// Nếu mover/PlayGround bị hủy thì khôi phục mover, xóa hết stopPoint
-			(cts = CancellationTokenSource.CreateLinkedTokenSource(mover.Token, PlayGround.Token))
-				.Token.Register(() => Cleanup(mover));
-			(mover as IGamepadListener).dpad = direction;
+				// cản 1 == Rock(Truck) hoặc platform khác. Tiến 1 bước, kiểm tra platform cản 2
+				// cản 2: Border, Rock, băng chuyền cùng chiều hoặc khác chiều, platform khác
+				platform = Peek(pos += direction);
+				o = platform as Obstacle;
+				c = platform as Conveyor;
+				if ((o && o.type == Obstacle.Type.Border)
+					|| (c && c.direction != direction)
+					|| (o && o.type == Obstacle.Type.Rock && mover is Bobby))
+				{
+					wayPoint = new() { position = pos - direction };
+					return;
+				}
+
+				if (c && c.direction == direction) FindWayPoint(pos);
+				else wayPoint = new() { position = pos };
+			}
 		}
 
 
-		public static void ChangeState()
+		public override bool CanExit(Mover mover) => mover is Flyer or Fireball || mover.direction == direction;
+
+
+		public static void ChangeStates()
 		{
 			foreach (var conveyor in conveyors)
-				conveyor.animationData = conveyor.anims[conveyor.direction = -conveyor.direction];
+				conveyor.animationData = conveyor.anims[conveyor.direction *= -1];
 		}
 
 
-		private static void Cleanup(Mover mover)
+		private static readonly List<Conveyor> conveyors = new();
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void Init() => PlayGround.onAwake += () =>
 		{
-			mover.speed = stopPoint.originalSpeed;
-			(mover as IGamepadListener).dpad = default;
-			if (!PlayGround.Token.IsCancellationRequested && mover.gameObject.activeSelf)
-				Main.AddListener(mover as IGamepadListener);
-
-			Pop(stopPoint.index);
-			stopPoint = null;
-			cts.Dispose();
-			cts = null;
-		}
+			conveyors.Clear();
+			wayPoint = null;
+		};
 
 
 
-		private sealed class StopPoint : IPlatform
+		private sealed class WayPoint : IWayPoint
 		{
-			public bool CanEnter(Mover mover) => true;
+			public Vector3 position { get; set; }
 
 
-			public Vector3 index;
-			public float originalSpeed;
 			public void OnEnter(Mover mover)
 			{
-				Cleanup(mover);
-				Peek(index).OnEnter(mover);
+				Pop(position);
+				wayPoint = null;
+				var platform = Peek(position);
+				if (platform is Conveyor)
+				{
+					mover.speed = (mover as IPlayer).originalSpeed;
+					Main.Register(mover as IPlayer);
+					return;
+				}
+
+				using var cts = CancellationTokenSource.CreateLinkedTokenSource(mover.Token, PlayGround.Token);
+				platform.OnEnter(mover);
+				if (cts.IsCancellationRequested) return;
+
+				mover.speed = (mover as IPlayer).originalSpeed;
+				Main.Register(mover as IPlayer);
 			}
 
 
 			public bool CanExit(Mover mover) => true;
+
+
 			public void OnExit(Mover mover) { }
+
+
+			public bool CanEnter(Mover mover) => true;
 		}
 	}
 }

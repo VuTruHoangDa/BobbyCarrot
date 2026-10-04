@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e37e96bec6ea54cb27865e104d71ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <direction>k__BackingField: {x: 0, y: 0, z: 0}
   speed: 0.05
+  <originalSpeed>k__BackingField: 0.05
   delay: 10
-  spriteRenderer: {fileID: 6426520223956413251}
+  <spriteRenderer>k__BackingField: {fileID: 6426520223956413251}
   sprites:
     reorderableList:
       canAdd: 1
@@ -73,14 +73,15 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 0
-    _keyValues: 010000000300000002000000
-    _keys: 010000000300000002000000
+    _keyValues: 010000000300000002000000i
+    _keys: 010000000300000002000000i
     _values:
     - {fileID: 1970458974, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}
     - {fileID: 295555256, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}
     - {fileID: -841513378, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}
 --- !u!212 &6426520223956413251
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -98,10 +99,13 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,9 +123,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 937442841
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 335754105
+  m_SortingLayer: 1
+  m_SortingOrder: -1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 1970458974, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -131,5 +137,5 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []

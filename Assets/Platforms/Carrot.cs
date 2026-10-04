@@ -46,7 +46,7 @@ namespace BobbyCarrot.Platforms
 
 
 		public override bool CanEnter(Mover mover) =>
-			mover is not LotusLeaf and not Cloud
+			mover is not IPlatform
 			&& (mover is Flyer or Fireball || type != Type.Leaf || mover is Truck);
 
 
@@ -69,6 +69,7 @@ namespace BobbyCarrot.Platforms
 					animationData = default;
 					sprite = hole;
 					++PlayGround.carrot;
+					// Nếu đủ Carrot thì 
 					break;
 
 				default: return;

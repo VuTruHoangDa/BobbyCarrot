@@ -47,48 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.05
+  <originalSpeed>k__BackingField: 0.05
   delay: 10
-  spriteRenderer: {fileID: 2485387665238149677}
+  <spriteRenderer>k__BackingField: {fileID: 2485387665238149677}
   animator: {fileID: 3647044587428486279}
-  sprites:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 0
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-        m_TextWithWhitespace: "Keys\u200B"
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 0
-    _keyValues:
-    - {x: 0, y: 1, z: 0}
-    - {x: 1, y: 0, z: 0}
-    - {x: 0, y: -1, z: 0}
-    - {x: -1, y: 0, z: 0}
-    _keys:
-    - {x: 0, y: 1, z: 0}
-    - {x: 1, y: 0, z: 0}
-    - {x: 0, y: -1, z: 0}
-    - {x: -1, y: 0, z: 0}
-    _values:
-    - {fileID: -8515870601207029014, guid: 2445db02d93cefa47bf998a5bda4ae9f, type: 3}
-    - {fileID: -2736197160245675044, guid: 7eb1412b372d06d4081b5fb97d560145, type: 3}
-    - {fileID: 6139032208394436819, guid: 46f8ac92394343642ba80e4c04a5cfcb, type: 3}
-    - {fileID: 9083638369008443466, guid: d9e2ee6a90440444e8074d30831ef21f, type: 3}
   walkAnims:
     reorderableList:
       canAdd: 1
@@ -167,11 +129,51 @@ MonoBehaviour:
     - {fileID: 9100000, guid: 555deedb6daa7e84fa0286494005a140, type: 2}
     - {fileID: 9100000, guid: 9449550ba7a1d1142a5ef3934e6d6b7a, type: 2}
     - {fileID: 9100000, guid: ed2ba67de000db541a167c01d117f96d, type: 2}
+  sprites:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 0
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+        m_TextWithWhitespace: "Keys\u200B"
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 0
+    _keyValues:
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    _keys:
+    - {x: 0, y: 1, z: 0}
+    - {x: 1, y: 0, z: 0}
+    - {x: 0, y: -1, z: 0}
+    - {x: -1, y: 0, z: 0}
+    _values:
+    - {fileID: -8515870601207029014, guid: 2445db02d93cefa47bf998a5bda4ae9f, type: 3}
+    - {fileID: -2736197160245675044, guid: 7eb1412b372d06d4081b5fb97d560145, type: 3}
+    - {fileID: 6139032208394436819, guid: 46f8ac92394343642ba80e4c04a5cfcb, type: 3}
+    - {fileID: 9083638369008443466, guid: d9e2ee6a90440444e8074d30831ef21f, type: 3}
   relaxAnim: {fileID: 9100000, guid: 6acc48cc70da370489e614c639035c15, type: 2}
-  dieAnim: {fileID: 9100000, guid: 33ea9b9d493845a4f86f81d1dd8703c4, type: 2}
   delayRelax: 5000
+  dieAnim: {fileID: 9100000, guid: 33ea9b9d493845a4f86f81d1dd8703c4, type: 2}
 --- !u!212 &2485387665238149677
 SpriteRenderer:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -189,10 +191,13 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,9 +215,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 937442841
-  m_SortingLayer: 2
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 335754105
+  m_SortingLayer: 1
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 6139032208394436819, guid: 46f8ac92394343642ba80e4c04a5cfcb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -222,8 +229,8 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+  m_BlendShapeWeights: []
 --- !u!95 &3647044587428486279
 Animator:
   serializedVersion: 7
