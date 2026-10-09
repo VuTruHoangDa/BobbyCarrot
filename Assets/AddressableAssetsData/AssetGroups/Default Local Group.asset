@@ -60,11 +60,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4a13a08e43044664ca70124e9c229992
-    m_Address: Assets/Platforms/Prefab/Wood UI.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 61860c28320a3c54d8c51d0855ef44f4
     m_Address: Assets/Platforms/Tiles/Trap.asset
     m_ReadOnly: 0
@@ -82,11 +77,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 689ca4bbeb15f614fb3e397f221c9584
     m_Address: Assets/Movers/Prefab/Fireball.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6b773ffa1b75d9541827d16d917aad5a
-    m_Address: Assets/Platforms/Prefab/Fan UI.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

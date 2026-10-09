@@ -8,7 +8,6 @@ namespace BobbyCarrot.Movers
 	{
 		/// <summary>
 		/// Hướng di chuyển ở bước tiếp theo: Up, Right, Down, Left, Zero (Zero=hủy/dừng)<br/>
-		/// Xử lý xong thì dpad == mover.direction<para/>
 		/// </summary>
 		public Vector3 input;
 
@@ -19,6 +18,7 @@ namespace BobbyCarrot.Movers
 			while (CanMove())
 			{
 				if (!await Move()) return;
+
 				if (direction != input)
 				{
 					direction = input;

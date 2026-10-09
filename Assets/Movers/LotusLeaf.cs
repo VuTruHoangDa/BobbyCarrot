@@ -53,7 +53,7 @@ namespace BobbyCarrot.Movers
 
 			--count;
 			var pos = transform.position;
-			if (Platform.Get(pos, Platform.Peek(pos) is LotusLeaf ? 1 : 2) is WaterFlow waterFlow)
+			if (Platform.Peek(pos, Platform.Peek(pos) is LotusLeaf ? 2 : 3) is WaterFlow waterFlow)
 			{
 				direction = default;
 
@@ -62,12 +62,12 @@ namespace BobbyCarrot.Movers
 				// => Nếu vậy thì lá sen đang cân bằng động, thêm vào balances hoặc woodBalances
 
 				var platform = Platform.Peek(pos += waterFlow.direction);
-				if (platform is LotusLeaf && Platform.Get(pos, 1).CanEnter(this))
+				if (platform is LotusLeaf && Platform.Peek(pos, 2).CanEnter(this))
 				{
 					balances[this] = waterFlow;
 					if (!task.isRunning()) task = CheckBalancesAndInertias();
 				}
-				else if (platform is Wood wood && Platform.Get(pos, 1).CanEnter(this)) woodBalances[this] = (waterFlow, wood);
+				else if (platform is Wood wood && Platform.Peek(pos, 2).CanEnter(this)) woodBalances[this] = (waterFlow, wood);
 				return true;
 			}
 
@@ -77,7 +77,7 @@ namespace BobbyCarrot.Movers
 				// Và ngay dưới lá sen cản là platform có thể đi vào ?
 				// => Nếu vậy thì lá sen đang có quán tính nhưng tạm thời bị cản, thêm vào inertias
 
-				if (leaf.direction != default && leaf.direction != -direction && Platform.Get(pos, 1).CanEnter(this))
+				if (leaf.direction != default && leaf.direction != -direction && Platform.Peek(pos, 2).CanEnter(this))
 				{
 					inertias.Add(this);
 					if (!task.isRunning()) task = CheckBalancesAndInertias();

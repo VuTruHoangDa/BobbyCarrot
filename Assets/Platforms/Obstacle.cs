@@ -23,7 +23,7 @@ namespace BobbyCarrot.Platforms
 			{
 				case 84:
 					p.type = Type.Wind;
-					animationData = windAnim;
+					p.animationData = windAnim;
 					break;
 
 				case 109:
@@ -100,8 +100,9 @@ namespace BobbyCarrot.Platforms
 				case Type.Wind:
 					if (mover is not Bobby) break;
 
-					Mover.Show<Flyer>(mover.transform.position, mover.direction);
+					var dir = mover.direction;
 					mover.gameObject.SetActive(false);
+					Mover.Show<Flyer>(position, dir);
 					break;
 
 				default: throw new Exception();

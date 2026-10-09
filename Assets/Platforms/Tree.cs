@@ -24,13 +24,13 @@ namespace BobbyCarrot.Platforms
 			p.sprite = sprites[p.type = Type.Garden];
 			p.height = 1;
 
-			// Quét Main.level tìm chiều cao cây đậu
+			// Quét Main.map tìm chiều cao cây
 			var pos = p.position.ToVector3Int();
 			while (true)
 			{
 				++p.height;
 				pos += Vector3Int.up;
-				var ids = Main.level.platforms[pos.x][pos.y];
+				var ids = Main.map.platforms[pos.x][pos.y];
 				for (int i = ids.Count - 1; i >= 0; --i)
 				{
 					if (ids[i] == (ushort)Type.Top) return p;

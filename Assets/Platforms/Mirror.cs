@@ -23,7 +23,6 @@ namespace BobbyCarrot.Platforms
 				147 => new(1, 1),
 				_ => new(-1, 1),
 			};
-			p.sprite = sprites[p.direction];
 
 			return p;
 		}

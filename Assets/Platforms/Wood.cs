@@ -8,13 +8,10 @@ namespace BobbyCarrot.Platforms
 	[CreateAssetMenu(fileName = "Wood", menuName = "Platforms/Wood")]
 	public sealed class Wood : Platform
 	{
-		[SerializeField] private Animator UI;
-
-
 		protected override Platform Create()
 		{
 			var p = base.Create() as Wood;
-			p.UI = UI;
+			p.anim = anim;
 
 			// Che đậy lá sen nếu có
 			if (Peek(position) is LotusLeaf leaf) leaf.spriteRenderer.sortingLayerID = 0;
@@ -26,16 +23,17 @@ namespace BobbyCarrot.Platforms
 		public override bool CanEnter(Mover mover) => mover is not IPlatform;
 
 
-		public override async void OnExit(Mover mover)
+		[SerializeField] private Animator anim;
+		public override void OnExit(Mover mover)
 		{
 			if (mover is Flyer or Fireball) return;
 
 			Pop(position);
-			UI = Instantiate(UI, position, Quaternion.identity);
-			UniTask.Delay((int)(UI.runtimeAnimatorController.animationClips[0].length * 1000) + 500)
+			anim = Instantiate(anim, position, Quaternion.identity);
+			UniTask.Delay((int)(anim.runtimeAnimatorController.animationClips[0].length * 1000) + 500)
 				.ContinueWith(() =>
 				{
-					if (UI) Destroy(UI.gameObject);
+					if (anim) Destroy(anim.gameObject);
 				}).Forget();
 
 			// Hiện lá sen nếu có

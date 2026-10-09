@@ -1,45 +1,33 @@
 ﻿using BobbyCarrot.Movers;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 
 namespace BobbyCarrot.Platforms
 {
-	[CreateAssetMenu(fileName ="Carrot", menuName ="Platforms/Carrot")]
+	[CreateAssetMenu(fileName = "Carrot", menuName = "Platforms/Carrot")]
 	public sealed class Carrot : Platform
 	{
-		private enum Type
+		private enum Type : ushort
 		{
-			Hole, Carrot, Leaf
+			Leaf = 136, Hole = 137, Carrot = 138
 		}
 		private Type type;
 
 		[SerializeField] private Sprite hole;
 		[SerializeField] private AnimationData carrot, leaf;
-
 		protected override Platform Create()
 		{
 			var p = base.Create() as Carrot;
 			p.hole = hole;
 			p.carrot = carrot;
 			p.leaf = leaf;
-
-			switch (id)
+			p.animationData = (p.type = (Type)id) switch
 			{
-				case 136:
-					p.type = Type.Leaf;
-					p.animationData = leaf;
-					break;
-
-				case 137:
-					p.type = Type.Hole;
-					break;
-
-				default:
-					p.type = Type.Carrot;
-					p.animationData = carrot;
-					break;
-			}
+				Type.Carrot => carrot,
+				Type.Leaf => leaf,
+				_ => default
+			};
+			if (p.type != Type.Hole) ++PlayGround.totalCarrot;
 
 			return p;
 		}

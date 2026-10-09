@@ -12,30 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfb071c6574ba44bb4b8cdd288cc3ac, type: 3}
   m_Name: Obstacle
   m_EditorClassIdentifier: 
-  anims:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 1
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-        m_TextWithWhitespace: "Keys\u200B"
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues: 
-    _keys: 
-    _values: []
+  windAnim:
+    animatedSprites:
+    - {fileID: -525338569, guid: 5a8959b93f9bc9f4cb6d3513a40df5dd, type: 3}
+    - {fileID: 1422295029, guid: 5a8959b93f9bc9f4cb6d3513a40df5dd, type: 3}
+    - {fileID: 876716770, guid: 5a8959b93f9bc9f4cb6d3513a40df5dd, type: 3}
+    - {fileID: -820575943, guid: 5a8959b93f9bc9f4cb6d3513a40df5dd, type: 3}
+    - {fileID: -1573511098, guid: 5a8959b93f9bc9f4cb6d3513a40df5dd, type: 3}
+    - {fileID: -646451005, guid: 5a8959b93f9bc9f4cb6d3513a40df5dd, type: 3}
+    animationSpeed: 10
+    animationStartTime: 0
+    flags: 0

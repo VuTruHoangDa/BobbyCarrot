@@ -11,8 +11,10 @@ namespace BobbyCarrot.Movers
 		{
 			spriteRenderer.sprite = sprites[direction];
 			while (CanMove()) if (!await Move()) return;
-			Show<Bobby>(transform.position, direction);
+			var pos = transform.position;
+			var dir = direction;
 			gameObject.SetActive(false);
+			Show<Bobby>(pos, dir);
 		}
 	}
 }

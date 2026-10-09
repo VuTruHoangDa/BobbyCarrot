@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3956733380701498543}
   - component: {fileID: 5067690234346672412}
   m_Layer: 0
-  m_Name: Fan UI
+  m_Name: Fan  UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

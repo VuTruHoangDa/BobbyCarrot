@@ -16,6 +16,8 @@ namespace BobbyCarrot.Platforms
 			var p = base.Create() as Egg;
 			p.sprites = sprites;
 			p.hasEgg = id == 140;
+			if (!p.hasEgg) ++PlayGround.egg;
+
 			return p;
 		}
 

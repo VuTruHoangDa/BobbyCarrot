@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Tilemaps;
@@ -52,13 +53,13 @@ namespace BobbyCarrot.Platforms
 			atlas = Addressables.LoadAssetAsync<SpriteAtlas>("Assets/Platforms/Texture/Atlas.spriteatlasv2").WaitForCompletion();
 			PlayGround.onAwake += () =>
 			{
-				array = Util.NewArray(Main.level.width, Main.level.height, (x, y) => new Stack<IPlatform>());
+				array = Util.NewArray(Main.map.width, Main.map.height, (x, y) => new List<IPlatform>());
 				maps = Addressables.InstantiateAsync("Assets/Platforms/Prefab/Maps.prefab")
 					.WaitForCompletion().GetComponentsInChildren<Tilemap>();
 				foreach (var map in maps)
 				{
 					map.origin = default;
-					map.size = new(Main.level.width, Main.level.height);
+					map.size = new(Main.map.width, Main.map.height);
 				}
 
 				anchor = maps[0].transform.parent;
@@ -68,14 +69,14 @@ namespace BobbyCarrot.Platforms
 			{
 				int count = 0;
 				Vector3Int pos = default;
-				PlayGround.taskList.Add(Task_Platform_Init);
+				PlayGround.tasks.Add(Task_Platform_Init);
 
 				// Hiện animation "Loading x % ...."
 				// Dùng count tính %
 
-				for (pos.x = 0; pos.x < Main.level.width; ++pos.x)
-					for (pos.y = 0; pos.y < Main.level.height; ++pos.y)
-						foreach (var id in Main.level.platforms[pos.x][pos.y])
+				for (pos.x = 0; pos.x < Main.map.width; ++pos.x)
+					for (pos.y = 0; pos.y < Main.map.height; ++pos.y)
+						foreach (var id in Main.map.platforms[pos.x][pos.y])
 						{
 							if ((++count) % 20 == 0) await UniTask.Yield();
 
@@ -172,7 +173,7 @@ namespace BobbyCarrot.Platforms
 
 				// Ẩn animation "Loading..."
 
-				PlayGround.taskList.Remove(Task_Platform_Init);
+				PlayGround.tasks.Remove(Task_Platform_Init);
 			};
 		}
 
@@ -180,26 +181,24 @@ namespace BobbyCarrot.Platforms
 		public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData) => tileData.sprite = sprite;
 
 
-		#region Peek, Get, Push, Pop
-		private static Stack<IPlatform>[][] array;
+		#region Peek, Push, Pop
+		private static List<IPlatform>[][] array;
 		private static Tilemap[] maps;
 		public Vector3 position { get; protected set; }
 
 
-		public static IPlatform Peek(Vector3 position) => array[(int)position.x][(int)position.y].Peek();
-
-
 		/// <summary>
-		/// Lưu ý: index==0 là trên cùng của stack, tương đương Peek()
+		/// Trên cùng (index=1) xuống dưới (index tăng dần)
 		/// </summary>
-		public static IPlatform Get(Vector3 position, int index) => array[(int)position.x][(int)position.y].ElementAt(index);
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static IPlatform Peek(Vector3 position, int index = 1) => array[(int)position.x][(int)position.y][^index];
 
 
 		public static void Push(Platform platform)
 		{
-			var stack = array[(int)platform.position.x][(int)platform.position.y];
-			maps[stack.Count].SetTile(platform.position.ToVector3Int(), platform);
-			stack.Push(platform);
+			var list = array[(int)platform.position.x][(int)platform.position.y];
+			maps[list.Count].SetTile(platform.position.ToVector3Int(), platform);
+			list.Add(platform);
 		}
 
 
@@ -209,24 +208,16 @@ namespace BobbyCarrot.Platforms
 			if (mover is not IPlatform) throw new Exception($"{mover} phải là IPlatform mới có thể Push vô Platform !");
 #endif
 			mover.transform.parent = anchor;
-			array[(int)position.x][(int)position.y].Push((IPlatform)mover);
-		}
-
-
-		public static void Push(IWayPoint wayPoint)
-		{
-#if DEBUG
-			if (Peek(wayPoint.position) is IWayPoint) throw new Exception($"Chỉ duy nhất 1 WayPoint được phép ở trên cùng ! Waypoint= {wayPoint}");
-#endif
-			array[(int)wayPoint.position.x][(int)wayPoint.position.y].Push(wayPoint);
+			array[(int)position.x][(int)position.y].Add((IPlatform)mover);
 		}
 
 
 		public static IPlatform Pop(Vector3 position)
 		{
-			var stack = array[(int)position.x][(int)position.y];
-			var p = stack.Pop();
-			if (p is Platform) maps[stack.Count].SetTile(position.ToVector3Int(), null);
+			var list = array[(int)position.x][(int)position.y];
+			var p = list[^1];
+			list.RemoveAt(list.Count - 1);
+			if (p is Platform) maps[list.Count].SetTile(position.ToVector3Int(), null);
 			return p;
 		}
 		#endregion
@@ -270,15 +261,13 @@ namespace BobbyCarrot.Platforms
 
 		private void Refresh()
 		{
-			var stack = array[(int)position.x][(int)position.y];
-			int i = stack.Count - 1;
-			foreach (var p in stack)
-				if (p as Platform == this)
+			var list = array[(int)position.x][(int)position.y];
+			for (int i = 0; i < list.Count; ++i)
+				if (list[i] as Platform == this)
 				{
 					maps[i].RefreshTile(position.ToVector3Int());
 					break;
 				}
-				else --i;
 		}
 
 
@@ -292,12 +281,9 @@ namespace BobbyCarrot.Platforms
 
 	public interface IPlatform
 	{
-		bool CanExit(Mover mover);
-
-		void OnExit(Mover mover);
-
 		bool CanEnter(Mover mover);
-
 		void OnEnter(Mover mover);
+		bool CanExit(Mover mover);
+		void OnExit(Mover mover);
 	}
 }

@@ -31,9 +31,10 @@ namespace BobbyCarrot.Platforms
 			if (mover is Flyer or Fireball || (mover is Bobby && !hasTruck)) return;
 
 			sprite = sprites[hasTruck = !hasTruck];
-			if (mover is Bobby) Mover.Show<Truck>(mover.transform.position, mover.direction);
-			else Mover.Show<Bobby>(mover.transform.position, mover.direction);
+			var dir = mover.direction;
 			mover.gameObject.SetActive(false);
+			if (mover is Bobby) Mover.Show<Truck>(position, dir);
+			else Mover.Show<Bobby>(position, dir);
 		}
 	}
 }

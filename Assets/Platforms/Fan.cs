@@ -2,7 +2,6 @@
 using RotaryHeart.Lib.SerializableDictionary;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 
 namespace BobbyCarrot.Platforms
@@ -48,14 +47,13 @@ namespace BobbyCarrot.Platforms
 				114 => Color.Green,
 				_ => Color.Violet
 			};
-			p.UI = Addressables.InstantiateAsync($"Assets/Platforms/Prefab/Fan UI.prefab",
-				position + directions[p.color], p.color switch
-				{
-					Color.Green => Quaternion.Euler(0, 0, 90),
-					Color.Red => Quaternion.Euler(0, 0, 180),
-					Color.Violet => Quaternion.Euler(0, 0, -90),
-					_ => Quaternion.identity
-				}).WaitForCompletion();
+			p.UI = Instantiate(UI, position + directions[p.color], p.color switch
+			{
+				Color.Green => Quaternion.Euler(0, 0, 90),
+				Color.Red => Quaternion.Euler(0, 0, 180),
+				Color.Violet => Quaternion.Euler(0, 0, -90),
+				_ => Quaternion.identity
+			});
 			p.UI.transform.parent = anchor;
 			p.UI.SetActive(false);
 			(fans[p.color] as List<Fan>).Add(p);

@@ -44,12 +44,12 @@ namespace BobbyCarrot.Platforms
 
 		private static async void CheckAllFlows()
 		{
-			if (PlayGround.taskList.Contains(Task_Platform_Init))
+			if (PlayGround.tasks.Contains(Task_Platform_Init))
 			{
-				PlayGround.taskList.Add(Task_CheckAllFlows);
+				PlayGround.tasks.Add(Task_CheckAllFlows);
 				do await UniTask.Yield();
-				while (PlayGround.taskList.Contains(Task_Platform_Init));
-				PlayGround.taskList.Remove(Task_CheckAllFlows);
+				while (PlayGround.tasks.Contains(Task_Platform_Init));
+				PlayGround.tasks.Remove(Task_CheckAllFlows);
 			}
 
 			foreach (var flow in flows.Random())
@@ -58,7 +58,7 @@ namespace BobbyCarrot.Platforms
 				if (platform is WaterFlow) continue;
 
 				// Có thể có platform đè lên lá sen
-				var lotusLeaf = platform is LotusLeaf leaf ? leaf : Get(flow.position, 1) as LotusLeaf;
+				var lotusLeaf = platform is LotusLeaf leaf ? leaf : Peek(flow.position, 2) as LotusLeaf;
 				if (lotusLeaf && lotusLeaf.direction == default) lotusLeaf.Move(flow.direction);
 			}
 		}

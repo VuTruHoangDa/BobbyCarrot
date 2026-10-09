@@ -1,5 +1,4 @@
-﻿using BobbyCarrot.Platforms;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -80,12 +79,5 @@ namespace BobbyCarrot
 	public enum Color
 	{
 		Yellow, Red, Green, Violet
-	}
-
-
-
-	public interface IWayPoint : IPlatform
-	{
-		Vector3 position { get; }
 	}
 }

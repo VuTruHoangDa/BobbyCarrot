@@ -1,4 +1,5 @@
-﻿using BobbyCarrot.Movers;
+﻿using BobbyCarrot.MapEditors;
+using BobbyCarrot.Movers;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,10 @@ using UnityEngine.InputSystem;
 
 namespace BobbyCarrot
 {
+	[DefaultExecutionOrder(-1)]	// Test
 	public sealed class Main : MonoBehaviour
 	{
+		[SerializeField] private MapEditor editor;  // Test
 		private Resolution fullRes;
 		private void Awake()
 		{
@@ -16,11 +19,15 @@ namespace BobbyCarrot
 				if (r.width > fullRes.width || r.height > fullRes.height) fullRes = r;
 
 			Screen.SetResolution(fullRes.width, fullRes.height, true);
+
+			// Test
+			map = new(editor.CreateMapFile());
+			Destroy(editor.gameObject);
 		}
 
 
-		public static Map level; /*{ get; private set; }*/
-		private static void NextLevel()
+		public static Map map { get; private set; }
+		private static void NextMap()
 		{
 			throw new NotImplementedException();
 		}
@@ -46,9 +53,6 @@ namespace BobbyCarrot
 			listeners.Remove(listener);
 			if (listener.dpad != default) listener.dpad = default;
 		}
-
-
-		public static bool IsRegistered(IPlayer listener) => listeners.Contains(listener);
 
 
 		private void Update()

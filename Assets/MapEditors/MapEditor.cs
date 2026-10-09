@@ -15,12 +15,14 @@ namespace BobbyCarrot.MapEditors
 		public string CreateMapFile()
 		{
 			// Kiểm tra data hợp lệ:
-			// Tất cả PinWheelButton nếu cùng màu thì phải cùng trạng thái Bật/Tắt
-			// LotusLeaf, Cloud chỉ có thể bị Wood đè lên
+			// Tất cả FanButton nếu cùng màu thì phải cùng trạng thái Bật/Tắt
 			// Chỉ có duy nhất 1 Start Point, 1 Exit Point
 			// Wood (nếu có) phải ở trên cùng
 			// Quạt vàng và quạt đỏ không thể đối diện nhau trên đường thẳng => mây sẽ không biết di chuyển thế nào ?
-			// ...
+			// Đặt Gương (Mirror) sao cho cầu lửa không tồn tại mãi, cuối cùng sẽ biến mất
+			// Người chơi có thể thay đổi Mirror để cho cầu lửa biến mất
+			// Đầu Rồng lửa không sát vật cản, cầu lửa luôn có thể đi tối thiểu 1 bước
+			// Gió (Wind) không thể sát vật cản => Flyer luôn có thể đi tối thiểu 1 bước
 
 			var sb = new StringBuilder();
 			using var writer = new StringWriter(sb);

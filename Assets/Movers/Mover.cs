@@ -23,7 +23,11 @@ namespace BobbyCarrot.Movers
 			{
 				mover.transform.position = position;
 				if (mover is IPlayer p) p.face = direction; else mover.direction = direction;
+#if DEBUG
+				if (mover.gameObject.activeSelf) throw new Exception($"{mover} đang bật, không thể bật thêm lần nữa !");
+#endif
 				mover.gameObject.SetActive(true);
+				Camera.Focus(mover);
 				return mover as T;
 			}
 
@@ -34,6 +38,7 @@ namespace BobbyCarrot.Movers
 #endif
 			if (mover is IPlayer p1) p1.face = direction; else mover.direction = direction;
 			mover.enabled = true;
+			Camera.Focus(mover);
 			return mover as T;
 		}
 
@@ -83,7 +88,7 @@ namespace BobbyCarrot.Movers
 			var pos = transform.position;
 			return (
 				// Nếu this là IPlatform (LotusLeaf, Cloud) thì kiểm tra platform ngay bên dưới this
-				this is IPlatform ? Platform.Get(pos, Platform.Peek(pos) as Mover == this ? 1 : 2).CanExit(this)
+				this is IPlatform ? Platform.Peek(pos, Platform.Peek(pos) as Mover == this ? 2 : 3).CanExit(this)
 				: Platform.Peek(pos).CanExit(this)
 					)
 				&& Platform.Peek(pos + (newDirection != default ? newDirection : direction)).CanEnter(this);
@@ -98,7 +103,7 @@ namespace BobbyCarrot.Movers
 			using var cts = CancellationTokenSource.CreateLinkedTokenSource(Token, PlayGround.Token);
 			if (this is not IPlatform)
 			{
-				Platform.Peek(transform.position.ToVector3Int()).OnExit(this);
+				Platform.Peek(transform.position).OnExit(this);
 				if (cts.IsCancellationRequested) return false;
 			}
 
@@ -117,12 +122,12 @@ namespace BobbyCarrot.Movers
 				Platform.Push(pos, this);
 			}
 			else pos += direction;
-			while (transform.position != pos)
+			do
 			{
-				transform.position = Vector3.MoveTowards(transform.position, pos, speed);
 				await UniTask.Delay(delay);
 				if (cts.IsCancellationRequested) return false;
-			}
+				transform.position = Vector3.MoveTowards(transform.position, pos, speed);
+			} while (transform.position != pos);
 
 			transform.position = pos;
 			if (p != null) p.OnEnter(this); else Platform.Peek(pos).OnEnter(this);
@@ -152,15 +157,22 @@ namespace BobbyCarrot.Movers
 		/// <summary>
 		/// Hướng xoay mặt, không phải hướng di chuyển
 		/// </summary>
-		public Vector3 face { get; set; }
+		Vector3 face { get; set; }
 
 		/// <summary>
-		/// Người chơi/CPU điều khiển di chuyển thông qua dpad<para/>
+		/// Người chơi/CPU điều khiển di chuyển, không xác định đích đến, nếu bị chặn thì dừng lại<para/>
 		/// Chú ý: ngay sau khi cài dpad thì player có thể thoát khỏi platform<br/>
 		/// => Trạng thái mover và bản đồ có thể thay đổi.
 		/// </summary>
-		public Vector3 dpad { get; set; }
+		Vector3 dpad { get; set; }
 
-		public float originalSpeed { get; }
+		float originalSpeed { get; }
+
+		/// <summary>
+		/// CPU di chuyển theo hướng direction và dừng lại khi tới dest hoặc bị chặn<para/>
+		/// Chú ý: khi đang di chuyển nếu gọi Move với direction khác sẽ lỗi<br/>
+		/// Nếu gọi Move khi đang di chuyển với dest mới với quãng đường mới lớn hơn thì di chuyển tới dest mới
+		/// </summary>
+		void Move(Vector3 direction, Vector3 dest);
 	}
 }

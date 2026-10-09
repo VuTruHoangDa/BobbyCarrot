@@ -84,6 +84,7 @@ namespace BobbyCarrot.Movers
 			// Phòng trường hợp mây khác đỏ không thể di chuyển được bước nào
 			if (color != Color.Red && fans.Count == 1) FindNewFan();
 			Vector3 dest;   // Phải khai báo dest ở đây vì C# có bug về khai báo scope, đang report
+			IPlatform platform;
 
 			if (fans[0].on || fans.Count == 2)
 			{
@@ -97,8 +98,9 @@ namespace BobbyCarrot.Movers
 					if (!fan.on) continue;
 
 					dest = transform.position + fan.direction;
-					var platform = Platform.Peek(dest);
-					if (platform is Wood wood && Platform.Get(dest, 1).CanEnter(this))
+					platform = Platform.Peek(dest);
+
+					if (platform is Wood wood && Platform.Peek(dest, 2).CanEnter(this))
 						(woodBalances.ContainsKey(this) ? woodBalances[this] : woodBalances[this] = new()).Add((fan, wood));
 					else if (platform is Cloud destCloud && !destCloud.isLock)
 					{
@@ -108,7 +110,7 @@ namespace BobbyCarrot.Movers
 							// Và mây cản không di chuyển ngược chiều mây hiện tại ?
 							// Hoặc nếu ngược chiều thì tương lai mây cản có thể bị thổi lên
 							// => Nếu vậy: thêm vào balances
-							if (Platform.Get(dest, 1) is CloudGrid grid && grid.color == color) continue;
+							if (Platform.Peek(dest, 2) is CloudGrid grid && grid.color == color) continue;
 
 							if (destCloud.direction != -fan.direction)
 							{
@@ -143,7 +145,7 @@ namespace BobbyCarrot.Movers
 
 			// Phải đặt tên mới là dest_cloud và Grid vì C# có bug về khai báo scope, đang report
 			if (Platform.Peek(dest) is not Cloud dest_cloud || dest_cloud.direction == default
-				|| (Platform.Get(dest, 1) is CloudGrid Grid && Grid.color == dest_cloud.color))
+				|| (Platform.Peek(dest, 2) is CloudGrid Grid && Grid.color == dest_cloud.color))
 			{
 				direction = default;
 				return true;

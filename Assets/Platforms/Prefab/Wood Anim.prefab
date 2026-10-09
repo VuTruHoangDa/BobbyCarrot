@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2984563959116149081}
   - component: {fileID: 7677888180655526507}
   m_Layer: 0
-  m_Name: Wood UI
+  m_Name: Wood Anim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

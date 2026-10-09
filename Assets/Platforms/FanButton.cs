@@ -94,9 +94,9 @@ namespace BobbyCarrot.Platforms
 
 			static async void WaitTurningOn()
 			{
-				PlayGround.taskList.Add(Task_WaitTurningOn);
+				PlayGround.tasks.Add(Task_WaitTurningOn);
 				do await UniTask.Yield();
-				while (PlayGround.taskList.Contains(Task_Platform_Init));
+				while (PlayGround.tasks.Contains(Task_Platform_Init));
 
 				foreach (var color in listTurnOn.Random())
 				{
@@ -104,7 +104,7 @@ namespace BobbyCarrot.Platforms
 					await UniTask.Yield();
 				}
 
-				PlayGround.taskList.Remove(Task_WaitTurningOn);
+				PlayGround.tasks.Remove(Task_WaitTurningOn);
 			}
 		}
 

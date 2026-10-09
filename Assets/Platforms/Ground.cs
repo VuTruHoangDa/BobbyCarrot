@@ -30,7 +30,6 @@ namespace BobbyCarrot.Platforms
 			else if (id == 181) startPoint = position;
 
 			p.dragonAnim = dragonAnim;
-			p.delayShowingFireBall = delayShowingFireBall;
 
 			return p;
 		}
@@ -42,43 +41,73 @@ namespace BobbyCarrot.Platforms
 
 
 		[SerializeField] private AnimationData dragonAnim;
-		[SerializeField] private int delayShowingFireBall;
-
+		private const float speed = 0.099f;
+		private static bool slipping;
 		public override async void OnEnter(Mover mover)
 		{
-			var token = PlayGround.Token;
 			switch (type)
 			{
 				case Type.DragonTail:
-					if (mover is Bobby or Truck)
 					{
-						#region Bắn cầu lửa và đợi cầu lửa biến mất
-						// Hủy dpad Bobby/ Truck
+						if (mover is not Bobby and not Truck) return;
+
+						#region Bắn cầu lửa, chỉ 1 cầu lửa được bật
+						var fireBall = Mover.Get<Fireball>();
+						if (fireBall && fireBall.gameObject.activeSelf) return;
 
 						var head = Peek(new(position.x - 2, position.y)) as Platform;
 						head.animationData = dragonAnim;
-						await UniTask.Delay(delayShowingFireBall);
-						if (token.IsCancellationRequested) return;
+						fireBall = Mover.Show<Fireball>(head.position, Vector3.left);
 
-						var fireball = Mover.Show<Fireball>(head.position, Vector3.left);
-						if (!fireball.gameObject.activeSelf)
-						{
-							// Đăng ký dpad Bobby/ Truck
-							break;
-						}
+						// Nếu mover di chuyển thì focus camera theo mover
+						var tokenPlayGround = PlayGround.Token;
+						var tokenFireBall = fireBall.Token;
+						while (!tokenPlayGround.IsCancellationRequested && !tokenFireBall.IsCancellationRequested
+							&& mover.transform.position == position) await UniTask.Yield();
 
-						fireball.Token.Register(() =>
-						{
-							// Đăng ký dpad Bobby/ Truck sau khi fireball biến mất
-						});
+						if (!tokenPlayGround.IsCancellationRequested) Camera.Focus(mover);
 						#endregion
 					}
 					break;
 
 				case Type.Ice:
-					if (mover is not Bobby) break;
+					{
+						if (slipping || mover is not Bobby) return;
 
-					// Bobby bị trượt một bước theo moverDirection
+						#region Bobby trượt 1 bước theo mover.direction (nếu có thể)
+						// Tìm dest
+						var dest = position;
+						var dir = mover.direction;
+						IPlatform platform;
+						do platform = Peek(dest += dir);
+						while (platform is Ground g && g.type == Type.Ice);
+
+						// Vật cản là Border hoặc khác
+						if (platform is Obstacle o && o.type == Obstacle.Type.Border)
+							if ((dest -= dir) == position) return;
+
+						slipping = true;
+						Main.Unregister(mover as IPlayer);
+						if (mover.speed < speed) mover.speed = speed;
+						var tokenMover = mover.Token;
+						tokenMover.Register(() => slipping = false);
+						(mover as IPlayer).Move(dir, dest);
+						var magnitude = (dest - position).sqrMagnitude;
+						var tokenPlayGround = PlayGround.Token;
+						while (!tokenPlayGround.IsCancellationRequested && !tokenMover.IsCancellationRequested
+							&& mover.direction != default && (mover.transform.position - position).sqrMagnitude < magnitude)
+							await UniTask.Yield();
+
+						if (tokenPlayGround.IsCancellationRequested || tokenMover.IsCancellationRequested) return;
+
+						slipping = false;
+						if (mover.direction == default)
+						{
+							mover.speed = (mover as IPlayer).originalSpeed;
+							Main.Register(mover as IPlayer);
+						}
+						#endregion
+					}
 					break;
 
 				case Type.Exit:
@@ -88,13 +117,19 @@ namespace BobbyCarrot.Platforms
 					break;
 
 				case Type.WindStop:
-					if (mover is not Flyer) break;
+					{
+						if (mover is not Flyer) break;
 
-					// Flyer biến mất, hiện Bobby
-					Mover.Show<Bobby>(mover.transform.position, mover.direction);
-					mover.gameObject.SetActive(false);
+						var dir = mover.direction;
+						mover.gameObject.SetActive(false);
+						Mover.Show<Bobby>(position, dir);
+					}
 					break;
 			}
 		}
+
+
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		private static void Init() => PlayGround.onAwake += () => slipping = false;
 	}
 }

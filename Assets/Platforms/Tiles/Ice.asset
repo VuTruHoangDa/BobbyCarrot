@@ -12,13 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79d908b69a446c4097077f7035c2a9f, type: 3}
   m_Name: Ice
   m_EditorClassIdentifier: 
-  anim:
-    animatedSprites:
-    - {fileID: -1780317531, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}
-    - {fileID: -1307424290, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}
-    - {fileID: -1580148453, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}
-    - {fileID: -1409657612, guid: 1a5a6d6a049386643b008f6a009fc550, type: 3}
-    animationSpeed: 7
-    animationStartTime: 0
-    flags: 1
-  duration: 1000
+  anim: {fileID: 2974395983378410893, guid: 977773fa18f3be54eb256fc04128106e, type: 3}
