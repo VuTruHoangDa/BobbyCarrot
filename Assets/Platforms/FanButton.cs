@@ -34,10 +34,9 @@ namespace BobbyCarrot.Platforms
 		public static readonly int Task_WaitTurningOn = "PinWheelButton.Create.WaitTurningOn".GetHashCode();
 		private static readonly List<Color> listTurnOn = new();
 
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as FanButton;
-			p.sprites = sprites;
+			var p = Instantiate(this);
 
 			switch (id)
 			{

@@ -3,17 +3,10 @@
 
 public class Test : MonoBehaviour
 {
+	public A a;
 	private void Start()
 	{
-		X x = new B();
-
-		print(x is A or B);
+		a.i = 123;
+		print(Instantiate(a).i);
 	}
 }
-
-
-class X { }
-
-class A : X { }
-
-class B :X { }

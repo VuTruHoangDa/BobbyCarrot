@@ -22,10 +22,9 @@ namespace BobbyCarrot.Platforms
 
 		[SerializeField] private SerializableDictionaryBase<Type, Sprite> sprites;
 
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Maze;
-			p.sprites = sprites;
+			var p = Instantiate(this);
 
 			p.type = id switch
 			{
@@ -36,7 +35,6 @@ namespace BobbyCarrot.Platforms
 				157 => Type.UpDown,
 				_ => Type.LeftRight,
 			};
-			p.sprite = sprites[p.type];
 			mazes.Add(p);
 			return p;
 		}

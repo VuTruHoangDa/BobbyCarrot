@@ -8,10 +8,9 @@ namespace BobbyCarrot.Platforms
 	[CreateAssetMenu(fileName = "Ice", menuName = "Platforms/Ice")]
 	public sealed class Ice : Platform
 	{
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Ice;
-			p.anim = anim;
+			var p = Instantiate(this);
 
 			return p;
 		}

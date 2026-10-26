@@ -13,10 +13,9 @@ namespace BobbyCarrot.Platforms
 		private Color color;
 		private bool on;
 
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Block;
-			p.sprites = sprites;
+			var p = Instantiate(this);
 
 			switch (id)
 			{
@@ -40,7 +39,6 @@ namespace BobbyCarrot.Platforms
 					p.on = false;
 					break;
 			}
-			p.sprite = sprites[p.color][p.on];
 			blocks[p.color].Add(p);
 
 			return p;

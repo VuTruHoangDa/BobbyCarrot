@@ -15,9 +15,9 @@ namespace BobbyCarrot.Platforms
 		public Type type { get; private set; }
 
 		[SerializeField] private AnimationData windAnim;
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Obstacle;
+			var p = Instantiate(this);
 
 			switch (id)
 			{

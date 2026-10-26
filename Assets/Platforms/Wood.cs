@@ -8,10 +8,9 @@ namespace BobbyCarrot.Platforms
 	[CreateAssetMenu(fileName = "Wood", menuName = "Platforms/Wood")]
 	public sealed class Wood : Platform
 	{
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Wood;
-			p.anim = anim;
+			var p = Instantiate(this);
 
 			// Che đậy lá sen nếu có
 			if (Peek(position) is LotusLeaf leaf) leaf.spriteRenderer.sortingLayerID = 0;

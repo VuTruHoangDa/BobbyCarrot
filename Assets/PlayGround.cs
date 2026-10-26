@@ -1,15 +1,10 @@
-﻿using BobbyCarrot.MapEditors;
-using BobbyCarrot.Movers;
+﻿using BobbyCarrot.Movers;
 using BobbyCarrot.Platforms;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 
 namespace BobbyCarrot
@@ -89,26 +84,5 @@ namespace BobbyCarrot
 			cts.Cancel();
 		}
 #endif
-
-
-		// Test
-		private void Update()
-		{
-			if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
-			{
-				ClearLogConsole();
-				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-			}
-		}
-
-
-		// Test
-		public static void ClearLogConsole()
-		{
-			Assembly assembly = Assembly.GetAssembly(typeof(Editor));
-			Type logEntries = assembly.GetType("UnityEditor.LogEntries");
-			MethodInfo clearConsoleMethod = logEntries.GetMethod("Clear");
-			clearConsoleMethod.Invoke(new object(), null);
-		}
 	}
 }

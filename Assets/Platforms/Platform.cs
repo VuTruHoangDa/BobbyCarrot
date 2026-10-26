@@ -17,14 +17,7 @@ namespace BobbyCarrot.Platforms
 		/// <summary>
 		/// Tạo instance mới > copy dữ liệu > khởi tạo dựa theo môi trường hiện tại
 		/// </summary>
-		protected virtual Platform Create()
-		{
-			var p = Instantiate(this);
-			p.sprite = sprite;
-			p.position = position;
-			p.animationData = animationData;
-			return p;
-		}
+		protected abstract Platform New();
 
 
 		public static ushort id { get; private set; }
@@ -33,14 +26,14 @@ namespace BobbyCarrot.Platforms
 
 		protected static Transform anchor { get; private set; }
 
-		private Sprite Δsprite;
+		[HideInInspector][SerializeField] private Sprite m_sprite;
 		protected Sprite sprite
 		{
-			get => Δsprite;
+			get => m_sprite;
 
 			set
 			{
-				Δsprite = value;
+				m_sprite = value;
 				Refresh();
 			}
 		}
@@ -168,7 +161,7 @@ namespace BobbyCarrot.Platforms
 							var tile = Addressables.LoadAssetAsync<Platform>(name).WaitForCompletion();
 							tile.position = pos;
 							tile.sprite = atlas.GetSprite(id.ToString());
-							Push(tile.Create());
+							Push(tile.New());
 						}
 
 				// Ẩn animation "Loading..."
@@ -184,7 +177,7 @@ namespace BobbyCarrot.Platforms
 		#region Peek, Push, Pop
 		private static List<IPlatform>[][] array;
 		private static Tilemap[] maps;
-		public Vector3 position { get; protected set; }
+		[field: HideInInspector][field: SerializeField] public Vector3 position { get; protected set; }
 
 
 		/// <summary>
@@ -224,14 +217,14 @@ namespace BobbyCarrot.Platforms
 
 
 		#region Animation
-		private AnimationData ΔanimationData;
+		[HideInInspector][SerializeField] private AnimationData m_animationData;
 		public AnimationData animationData
 		{
-			get => ΔanimationData;
+			get => m_animationData;
 
 			set
 			{
-				ΔanimationData = value;
+				m_animationData = value;
 				Refresh();
 			}
 		}

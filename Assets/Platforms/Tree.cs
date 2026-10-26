@@ -16,11 +16,9 @@ namespace BobbyCarrot.Platforms
 		private Type type;
 
 
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Tree;
-			p.sprites = sprites;
-			p.delay = delay;
+			var p = Instantiate(this);
 			p.sprite = sprites[p.type = Type.Garden];
 			p.height = 1;
 

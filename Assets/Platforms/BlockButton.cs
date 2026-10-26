@@ -14,10 +14,9 @@ namespace BobbyCarrot.Platforms
 		private bool on;
 
 
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as BlockButton;
-			p.sprites = sprites;
+			var p = Instantiate(this);
 
 			switch (id)
 			{
@@ -42,7 +41,6 @@ namespace BobbyCarrot.Platforms
 					break;
 			}
 
-			p.sprite = sprites[p.color][p.on];
 			return p;
 		}
 

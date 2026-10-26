@@ -26,9 +26,9 @@ namespace BobbyCarrot.Platforms
 		}
 
 
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Item;
+			var p = Instantiate(this);
 			p.type = (Type)id;
 
 			return p;

@@ -11,10 +11,9 @@ namespace BobbyCarrot.Platforms
 		[SerializeField] private SerializableDictionaryBase<bool, Sprite> sprites;
 		private bool hasEgg;
 
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Egg;
-			p.sprites = sprites;
+			var p = Instantiate(this);
 			p.hasEgg = id == 140;
 			if (!p.hasEgg) ++PlayGround.egg;
 

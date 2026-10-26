@@ -17,11 +17,9 @@ namespace BobbyCarrot.Platforms
 		[SerializeField] private SerializableDictionaryBase<bool, Sprite> sprites;
 		private bool on;
 
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as MazeButton;
-			p.sprites = sprites;
-			p.sprite = sprites[p.on = id == 163];
+			var p = Instantiate(this);
 			buttons.Add(p);
 			return p;
 		}

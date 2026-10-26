@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd91bf45dc7c68489f5c60e2a254e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Test
+  a: {fileID: 11400000, guid: 71d3042708742e44f9b7188f44f6db2e, type: 2}
 --- !u!4 &978368390
 Transform:
   m_ObjectHideFlags: 0

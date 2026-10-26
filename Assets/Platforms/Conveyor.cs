@@ -12,10 +12,9 @@ namespace BobbyCarrot.Platforms
 	{
 		[SerializeField] private SerializableDictionaryBase<Vector3, AnimationData> anims;
 		private Vector3 direction;
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Conveyor;
-			p.anims = anims;
+			var p = Instantiate(this);
 
 			p.direction = id switch
 			{
@@ -47,21 +46,19 @@ namespace BobbyCarrot.Platforms
 			if (mover.speed < speed) mover.speed = speed;
 			var tokenPlayGround = PlayGround.Token;
 			var tokenMover = mover.Token;
-			tokenMover.Register(() => transporting = false);
 			(mover as IPlayer).Move(direction, dest);
 			var magnitude = (dest - position).sqrMagnitude;
 			while (!tokenPlayGround.IsCancellationRequested && !tokenMover.IsCancellationRequested
 				&& mover.direction != default && (mover.transform.position - position).sqrMagnitude < magnitude)
 				await UniTask.Yield();
 
-			if (tokenPlayGround.IsCancellationRequested || tokenMover.IsCancellationRequested) return;
+			if (tokenPlayGround.IsCancellationRequested) return;
 
 			transporting = false;
-			if (mover.direction == default)
-			{
-				mover.speed = (mover as IPlayer).originalSpeed;
-				Main.Register(mover as IPlayer);
-			}
+			if (tokenMover.IsCancellationRequested || mover.direction != default) return;
+
+			mover.speed = (mover as IPlayer).originalSpeed;
+			Main.Register(mover as IPlayer);
 
 
 			Vector3 FindDest(Vector3 pos)

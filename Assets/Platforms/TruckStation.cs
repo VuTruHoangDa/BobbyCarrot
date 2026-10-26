@@ -11,10 +11,9 @@ namespace BobbyCarrot.Platforms
 		[SerializeField] private SerializableDictionaryBase<bool, Sprite> sprites;
 		private bool hasTruck;
 
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as TruckStation;
-			p.sprites = sprites;
+			var p = Instantiate(this);
 			p.hasTruck = id == 375;
 
 			return p;

@@ -10,10 +10,9 @@ namespace BobbyCarrot.Platforms
 	{
 		public Color color { get; private set; }
 		[SerializeField] private SerializableDictionaryBase<Color, Sprite> sprites;
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as CloudGrid;
-			p.sprites = sprites;
+			var p = Instantiate(this);
 
 			p.color = id switch
 			{
@@ -21,7 +20,6 @@ namespace BobbyCarrot.Platforms
 				81 => Color.Violet,
 				_ => Color.Green
 			};
-			p.sprite = sprites[p.color];
 
 			return p;
 		}

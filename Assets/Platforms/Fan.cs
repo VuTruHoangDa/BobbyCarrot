@@ -34,11 +34,9 @@ namespace BobbyCarrot.Platforms
 
 		[SerializeField] private SerializableDictionaryBase<Color, AnimationData> anims;
 		[SerializeField] private SerializableDictionaryBase<Color, Sprite> sprites;
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Fan;
-			p.sprites = sprites;
-			p.anims = anims;
+			var p = Instantiate(this);
 
 			p.color = id switch
 			{

@@ -17,9 +17,9 @@ namespace BobbyCarrot.Platforms
 		public static Vector3 startPoint { get; private set; }
 
 
-		protected override Platform Create()
+		protected override Platform New()
 		{
-			var p = base.Create() as Ground;
+			var p = Instantiate(this);
 
 			if (id == 245 || id == 246 || (251 <= id && id <= 253)) p.type = Type.Water;
 			else if (263 <= id && id <= 268) p.type = Type.Sky;
@@ -28,8 +28,6 @@ namespace BobbyCarrot.Platforms
 			else if (id == 85) p.type = Type.WindStop;
 			else if (id == 121) p.type = Type.DragonTail;
 			else if (id == 181) startPoint = position;
-
-			p.dragonAnim = dragonAnim;
 
 			return p;
 		}
@@ -90,7 +88,6 @@ namespace BobbyCarrot.Platforms
 						Main.Unregister(mover as IPlayer);
 						if (mover.speed < speed) mover.speed = speed;
 						var tokenMover = mover.Token;
-						tokenMover.Register(() => slipping = false);
 						(mover as IPlayer).Move(dir, dest);
 						var magnitude = (dest - position).sqrMagnitude;
 						var tokenPlayGround = PlayGround.Token;
@@ -98,14 +95,13 @@ namespace BobbyCarrot.Platforms
 							&& mover.direction != default && (mover.transform.position - position).sqrMagnitude < magnitude)
 							await UniTask.Yield();
 
-						if (tokenPlayGround.IsCancellationRequested || tokenMover.IsCancellationRequested) return;
+						if (tokenPlayGround.IsCancellationRequested) return;
 
 						slipping = false;
-						if (mover.direction == default)
-						{
-							mover.speed = (mover as IPlayer).originalSpeed;
-							Main.Register(mover as IPlayer);
-						}
+						if (tokenMover.IsCancellationRequested || mover.direction != default) return;
+
+						mover.speed = (mover as IPlayer).originalSpeed;
+						Main.Register(mover as IPlayer);
 						#endregion
 					}
 					break;
